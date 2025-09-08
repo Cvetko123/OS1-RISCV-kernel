@@ -2,6 +2,8 @@
 #include "../lib/console.h"
 #include  "../lib/hw.h"
 #include "../h/MemoryAllocator.hpp"
+#include "../h/syscall_c.hpp"
+#include  "../h/syscall_cpp.hpp"
 #include "../h/Riscv.hpp"
 
 // uint64 pc;
@@ -46,30 +48,30 @@
 //extern "C" void SupervisorTrap();
 
 void AllocatorTest() {
-    uint64* a1=(uint64*)MemoryAllocator::Instance()->mem_alloc(sizeof(uint64));
+    uint64* a1=new uint64;
     *a1=4;
     __putc(*a1+'0');
     __putc('\n');
-    uint64* a2=(uint64*)MemoryAllocator::Instance()->mem_alloc(sizeof(uint64));
+    uint64* a2=new uint64;
     *a2=5;
     __putc(*a2+'0');
     __putc('\n');
-    uint64* a3=(uint64*)MemoryAllocator::Instance()->mem_alloc(sizeof(uint64));
+    uint64* a3=new uint64;
     *a3=6;
     __putc(*a3+'0');
     __putc('\n');
-    uint64* a4=(uint64*)MemoryAllocator::Instance()->mem_alloc(sizeof(uint64));
+    uint64* a4=new uint64;
     *a4=7;
     __putc(*a4+'0');
     __putc('\n');
-    uint64* a5=(uint64*)MemoryAllocator::Instance()->mem_alloc(sizeof(uint64));
+    uint64* a5=new uint64;
     *a5=8;
     __putc(*a5+'0');
     __putc('\n');
-    MemoryAllocator::Instance()->mem_free(a1);
-    MemoryAllocator::Instance()->mem_free(a3);
-    MemoryAllocator::Instance()->mem_free(a4);
-    uint64* a6=(uint64*)MemoryAllocator::Instance()->mem_alloc(sizeof(uint64)*9);
+    delete a1;
+    delete a3;
+    delete a4;
+    uint64* a6=new uint64;
     *a6=9;
     __putc(*a6+'0');
     __putc('\n');
@@ -80,7 +82,8 @@ extern "C" void SupervisorTrap();
 
 void main() {
     Riscv::set_stvec((uint64)SupervisorTrap);
-    __asm__ volatile ("ecall");
+    AllocatorTest();
+
     __putc('O');
     __putc('K');
     __putc('\n');
