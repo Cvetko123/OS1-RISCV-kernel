@@ -2,6 +2,7 @@
 #include "../lib/console.h"
 #include  "../lib/hw.h"
 #include "../h/MemoryAllocator.hpp"
+#include "../h/Riscv.hpp"
 
 // uint64 pc;
 // uint64 counter=0;
@@ -44,13 +45,7 @@
 
 //extern "C" void SupervisorTrap();
 
-
-
-void main(){
-    // __asm__ volatile ("csrw stvec, %[handler]" :: [handler] "r" (SupervisorTrap));
-    // __asm__ volatile("csrs sstatus, 0x02");
-    // while (1){}
-
+void AllocatorTest() {
     uint64* a1=(uint64*)MemoryAllocator::Instance()->mem_alloc(sizeof(uint64));
     *a1=4;
     __putc(*a1+'0');
@@ -79,10 +74,22 @@ void main(){
     __putc(*a6+'0');
     __putc('\n');
 
-
-
-
-
-
-
 }
+
+extern "C" void SupervisorTrap();
+
+void main() {
+    Riscv::set_stvec((uint64)SupervisorTrap);
+    __asm__ volatile ("ecall");
+    __putc('O');
+    __putc('K');
+    __putc('\n');
+}
+
+
+
+
+
+
+
+

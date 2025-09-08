@@ -20,8 +20,6 @@ protected:
 
     MemoryAllocator();
 
-
-
     void try_to_join(MemoryHeader* block);
 
 private:

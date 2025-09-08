@@ -66,11 +66,7 @@ void* MemoryAllocator::mem_alloc(size_t size) {
             curr->prev->next=new_seg;
         if (curr->next)
             curr->next->prev=new_seg;
-
-
         curr->size=actulalSize;
-
-
         this->freeMemSize-= (actulalSize + sizeof(MemoryHeader));
     }
     else {

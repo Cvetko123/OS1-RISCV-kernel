@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< HEAD
-=======
   <component name="CidrRootsConfiguration">
     <sourceRoots>
       <file path="$PROJECT_DIR$/h" />
       <file path="$PROJECT_DIR$/src" />
     </sourceRoots>
   </component>
->>>>>>> 7fe1600adce20a76884aa8bf8d720cc48500ecf1
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MakefileSettings">
     <option name="linkedExternalProjectsSettings">
       <MakefileProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-<<<<<<< HEAD
-=======
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
           </set>
         </option>
->>>>>>> 7fe1600adce20a76884aa8bf8d720cc48500ecf1
         <option name="version" value="2" />
       </MakefileProjectSettings>
     </option>
