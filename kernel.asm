@@ -98,6 +98,7 @@ void main(){
     // __asm__ volatile ("csrw stvec, %[handler]" :: [handler] "r" (SupervisorTrap));
     // __asm__ volatile("csrs sstatus, 0x02");
     // while (1){}
+
     uint64* a1=(uint64*)MemoryAllocator::Instance()->mem_alloc(sizeof(uint64));
     80001090:	00000097          	auipc	ra,0x0
     80001094:	1f8080e7          	jalr	504(ra) # 80001288 <_ZN15MemoryAllocator8InstanceEv>
@@ -235,10 +236,10 @@ void main(){
     80001228:	00008067          	ret
 
 000000008000122c <_ZN15MemoryAllocatorC1Ev>:
-//
 
 #include "../h/MemoryAllocator.hpp"
 #include "../lib/console.h"
+
 
 MemoryAllocator::MemoryAllocator() {
     8000122c:	ff010113          	addi	sp,sp,-16
@@ -335,10 +336,12 @@ void* MemoryAllocator::mem_alloc(size_t size) {
     8000130c:	00078463          	beqz	a5,80001314 <_ZN15MemoryAllocator9mem_allocEm+0x30>
         offset=1;
     80001310:	00100793          	li	a5,1
+
     size_t actulalSize = (size  / MEM_BLOCK_SIZE+offset ) * MEM_BLOCK_SIZE;
     80001314:	0065d713          	srli	a4,a1,0x6
     80001318:	00f70733          	add	a4,a4,a5
     8000131c:	00671713          	slli	a4,a4,0x6
+
 
     MemoryHeader* curr= this->head;
     80001320:	00050793          	mv	a5,a0
@@ -356,10 +359,14 @@ void* MemoryAllocator::mem_alloc(size_t size) {
         return nullptr;
     }
 
+
+
     if (curr->size - actulalSize >= MEM_BLOCK_SIZE+sizeof(MemoryHeader)) {
     80001340:	40e686b3          	sub	a3,a3,a4
     80001344:	05700593          	li	a1,87
     80001348:	08d5f863          	bgeu	a1,a3,800013d8 <_ZN15MemoryAllocator9mem_allocEm+0xf4>
+
+
         MemoryHeader* new_seg=(MemoryHeader*)((char*)curr + sizeof(MemoryHeader) + actulalSize);
     8000134c:	01870793          	addi	a5,a4,24
     80001350:	00f487b3          	add	a5,s1,a5
@@ -390,17 +397,21 @@ void* MemoryAllocator::mem_alloc(size_t size) {
     80001384:	00068463          	beqz	a3,8000138c <_ZN15MemoryAllocator9mem_allocEm+0xa8>
             curr->next->prev=new_seg;
     80001388:	00f6b823          	sd	a5,16(a3)
+
+
         curr->size=actulalSize;
     8000138c:	00e4b023          	sd	a4,0(s1)
+
+
         this->freeMemSize-= (actulalSize + sizeof(MemoryHeader));
     80001390:	00863783          	ld	a5,8(a2)
     80001394:	40e78733          	sub	a4,a5,a4
     80001398:	fe870713          	addi	a4,a4,-24
     8000139c:	00e63423          	sd	a4,8(a2)
-        if (curr->next)
             curr->next->prev=curr->prev;
         this->freeMemSize-= actulalSize;
     }
+
 
     __putc('m');
     800013a0:	06d00513          	li	a0,109
@@ -410,6 +421,9 @@ void* MemoryAllocator::mem_alloc(size_t size) {
     800013ac:	00a00513          	li	a0,10
     800013b0:	00002097          	auipc	ra,0x2
     800013b4:	2ec080e7          	jalr	748(ra) # 8000369c <__putc>
+
+
+
     return  (void*)((char*)curr + sizeof(MemoryHeader));
     800013b8:	01848513          	addi	a0,s1,24
 }

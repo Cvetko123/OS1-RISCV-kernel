@@ -5,6 +5,7 @@
 #include "../h/MemoryAllocator.hpp"
 #include "../lib/console.h"
 
+
 MemoryAllocator::MemoryAllocator() {
     this->head = (MemoryHeader*)HEAP_START_ADDR;
     // this->tail = (MemoryHeader*)HEAP_START_ADDR;
@@ -34,7 +35,9 @@ void* MemoryAllocator::mem_alloc(size_t size) {
     uint64 offset = size % MEM_BLOCK_SIZE;
     if (offset!=0)
         offset=1;
+
     size_t actulalSize = (size  / MEM_BLOCK_SIZE+offset ) * MEM_BLOCK_SIZE;
+
 
     MemoryHeader* curr= this->head;
     while (curr->next!=nullptr && curr->size < actulalSize) {
@@ -44,7 +47,11 @@ void* MemoryAllocator::mem_alloc(size_t size) {
         return nullptr;
     }
 
+
+
     if (curr->size - actulalSize >= MEM_BLOCK_SIZE+sizeof(MemoryHeader)) {
+
+
         MemoryHeader* new_seg=(MemoryHeader*)((char*)curr + sizeof(MemoryHeader) + actulalSize);
         new_seg->size = curr->size - actulalSize - sizeof(MemoryHeader);
         new_seg->next=curr->next;
@@ -59,7 +66,11 @@ void* MemoryAllocator::mem_alloc(size_t size) {
             curr->prev->next=new_seg;
         if (curr->next)
             curr->next->prev=new_seg;
+
+
         curr->size=actulalSize;
+
+
         this->freeMemSize-= (actulalSize + sizeof(MemoryHeader));
     }
     else {
@@ -73,8 +84,12 @@ void* MemoryAllocator::mem_alloc(size_t size) {
         this->freeMemSize-= actulalSize;
     }
 
+
     __putc('m');
     __putc('\n');
+
+
+
     return  (void*)((char*)curr + sizeof(MemoryHeader));
 }
 
@@ -95,6 +110,7 @@ void MemoryAllocator::mem_free(void* ptr) {
     while (curr->next!=nullptr && curr->next < block) {
         curr=curr->next;
     }
+
     if (curr==this->head and curr > block) {
         block->next=curr;
         block->prev=curr->prev;

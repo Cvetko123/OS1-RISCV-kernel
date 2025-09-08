@@ -50,6 +50,7 @@ void main(){
     // __asm__ volatile ("csrw stvec, %[handler]" :: [handler] "r" (SupervisorTrap));
     // __asm__ volatile("csrs sstatus, 0x02");
     // while (1){}
+
     uint64* a1=(uint64*)MemoryAllocator::Instance()->mem_alloc(sizeof(uint64));
     *a1=4;
     __putc(*a1+'0');
@@ -77,6 +78,7 @@ void main(){
     *a6=9;
     __putc(*a6+'0');
     __putc('\n');
+
 
 
 
