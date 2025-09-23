@@ -11,6 +11,14 @@ public:
     void* mem_alloc(size_t size);//size in bytes
 
     void mem_free(void* ptr);
+
+    size_t getFreeMemSize() {
+        return this->freeMemSize;
+    }
+
+    size_t getLargestFreeBlock();
+
+
 protected:
     typedef struct MemoryHeader {
         size_t size;

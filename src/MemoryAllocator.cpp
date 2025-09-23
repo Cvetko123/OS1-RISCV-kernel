@@ -143,3 +143,14 @@ void MemoryAllocator::try_to_join(MemoryHeader* block) {
         this->freeMemSize+= sizeof(MemoryHeader);
     }
 }
+
+size_t MemoryAllocator::getLargestFreeBlock() {
+    size_t maxSize=0;
+    MemoryHeader* curr=this->head;
+    while (curr!=nullptr) {
+        if (curr->size > maxSize)
+            maxSize=curr->size;
+        curr=curr->next;
+    }
+    return maxSize;
+}

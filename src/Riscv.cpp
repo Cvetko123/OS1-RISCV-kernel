@@ -33,6 +33,14 @@ void Riscv::SupervisorTrapHandler() {
         MemoryAllocator::Instance()->mem_free(ptr);
         __asm__ volatile ("mv a0, %[x]" :: [x] "r" (0));
     }
+    else if (syscode==MEM_GET_FREE_SPACE) {
+        size_t freeMem = MemoryAllocator::Instance()->getFreeMemSize();
+        __asm__ volatile ("mv a0, %[x]" :: [x] "r" (freeMem));
+    }
+    else if (syscode==MEM_GET_LARGEST_FREE_BLOCK) {
+        size_t largestBlock = MemoryAllocator::Instance()->getLargestFreeBlock();
+        __asm__ volatile ("mv a0, %[x]" :: [x] "r" (largestBlock));
+    }
     else {
         __putc('E');
         __putc('\n');

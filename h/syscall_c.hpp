@@ -5,7 +5,9 @@
 
 enum syscallCodes {
     MEM_ALLOC=0x01,
-    MEM_FREE=0x02
+    MEM_FREE=0x02,
+    MEM_GET_FREE_SPACE=0x03,
+    MEM_GET_LARGEST_FREE_BLOCK=0x04
 };
 
 
@@ -13,6 +15,10 @@ enum syscallCodes {
 void* mem_alloc(size_t size);
 
 int mem_free(void* ptr);
+
+size_t mem_get_free_space();
+
+size_t mem_get_largest_free_block();
 
 
 

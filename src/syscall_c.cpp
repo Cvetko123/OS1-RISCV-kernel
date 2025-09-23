@@ -30,3 +30,21 @@ int mem_free(void* ptr) {
     __asm__ volatile ("mv %[x], a0" : [x] "=r" (ret));
     return (int)ret;
 }
+
+size_t mem_get_free_space() {
+    uint64 opcode=MEM_GET_FREE_SPACE;
+    __asm__ volatile ("mv a0, %[x]" :: [x] "r" (opcode));
+    __asm__ volatile ("ecall");
+    uint64 ret;
+    __asm__ volatile ("mv %[x], a0" : [x] "=r" (ret));
+    return (size_t)ret;
+}
+
+size_t mem_get_largest_free_block() {
+    uint64 opcode=MEM_GET_LARGEST_FREE_BLOCK;
+    __asm__ volatile ("mv a0, %[x]" :: [x] "r" (opcode));
+    __asm__ volatile ("ecall");
+    uint64 ret;
+    __asm__ volatile ("mv %[x], a0" : [x] "=r" (ret));
+    return (size_t)ret;
+}
