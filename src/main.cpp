@@ -6,6 +6,7 @@
 #include  "../h/syscall_cpp.hpp"
 #include "../h/Riscv.hpp"
 #include "../h/print.hpp"
+#include "../h/List.hpp"
 
 // uint64 pc;
 // uint64 counter=0;
@@ -89,14 +90,15 @@ void main() {
 
     printString("OK\n");
 
-    size_t pom1= mem_get_free_space();
-    printString("Free mem: ");
-    printInteger(pom1);
-    printString("\n");
-    size_t pom2= mem_get_largest_free_block();
-    printString("Largest free block: ");
-    printInteger(pom2);
-    printString("\n");
+
+    // size_t pom1= mem_get_free_space();
+    // printString("Free mem: ");
+    // printInteger(pom1);
+    // printString("\n");
+    // size_t pom2= mem_get_largest_free_block();
+    // printString("Largest free block: ");
+    // printInteger(pom2);
+    // printString("\n");
 }
 
 
