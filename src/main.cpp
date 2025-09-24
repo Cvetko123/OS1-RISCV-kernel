@@ -7,47 +7,12 @@
 #include "../h/Riscv.hpp"
 #include "../h/print.hpp"
 #include "../h/List.hpp"
-
-// uint64 pc;
-// uint64 counter=0;
-// void f() {
-//     __putc('a');
-//     __putc('\n');
-//     __asm__ volatile ("mv ra, %[destination]" :: [destination] "r" (pc));
-//     __asm__ volatile ("sd ra, 8(sp)");
-// }
-//
-//
-//
-// void dispatch() {
-//     __asm__ volatile ("mv %[ret], ra" : [ret] "=r" (pc)  );
-//     __asm__ volatile ("mv ra, %[destination]" :: [destination] "r" (&f));
-// }
-//
-//
-//
-//
-//
-// extern "C" void SuperVisorTrapHandler() {
-//     uint64 scause;
-//     __asm__ volatile ("csrr %[ret], scause" : [ret] "=r" (scause) );
-//     if (scause == (0x01UL <<63 | 0x01)) {
-//         counter++;
-//
-//         if (counter>=50) {
-//
-//             __putc('b');
-//             __putc('\n');
-//             counter=0;
-//         }
-//         __asm__ volatile ("csrc sip, 0x02");
-//     }
-//     console_handler();
-//
-// }
+#include  "../h/TCB.hpp"
+#include "../h/workers.hpp"
 
 
-//extern "C" void SupervisorTrap();
+
+
 
 void AllocatorTest() {
     uint64* a1=new uint64;
@@ -77,18 +42,53 @@ void AllocatorTest() {
     *a6=9;
     __putc(*a6+'0');
     __putc('\n');
+}
+extern void userMain();
 
+void userWrapper(void* arg)
+{
+    printString("user main start:\n");
+    userMain();
+    printString("user main end:\n");
+}
 
+void WorkerAWrapper(void* arg)
+{
+    //printString("worker A start:\n");
+    workerBodyA();
+    //printString("worker A end:\n");
+}
 
+void WorkerBWrapper(void* arg)
+{
+    //printString("worker B start:\n");
+    workerBodyB();
+    //printString("worker B end:\n");
 }
 
 extern "C" void SupervisorTrap();
 
+
+
 void main() {
     Riscv::set_stvec((uint64)SupervisorTrap);
-    AllocatorTest();
+    //AllocatorTest();
 
-    printString("OK\n");
+     thread_t coroutines[2];
+     thread_create(&coroutines[0],nullptr,nullptr);
+     thread_create(&coroutines[1],userWrapper,nullptr);
+
+
+     while (!coroutines[1]->isFinished()) {
+         TCB::dispatch();
+     }
+
+     for (auto coroutine: coroutines) { delete coroutine; }
+
+     AllocatorTest();
+     printString("Finished\n");
+
+    //printString("OK\n");
 
 
     // size_t pom1= mem_get_free_space();

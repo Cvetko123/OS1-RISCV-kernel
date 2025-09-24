@@ -81,8 +81,8 @@ void* MemoryAllocator::mem_alloc(size_t size) {
     }
 
 
-    __putc('m');
-    __putc('\n');
+    //__putc('m');
+    //__putc('\n');
 
 
 
@@ -123,8 +123,8 @@ void MemoryAllocator::mem_free(void* ptr) {
     }
 
     this->freeMemSize+= block->size;
-    __putc('n');
-    __putc('\n');
+     //__putc('n');
+    // __putc('\n');
     try_to_join(block->prev);
     try_to_join(block);
 }
@@ -134,8 +134,8 @@ void MemoryAllocator::try_to_join(MemoryHeader* block) {
     if (block==nullptr)
         return;
     if (block->next!=nullptr && ((char*)block + sizeof(MemoryHeader) + block->size) == (char*)block->next) {
-        __putc('t');
-        __putc('\n');
+        // __putc('t');
+         //__putc('\n');
         block->size += block->next->size;
         block->next=block->next->next;
         if (block->next)

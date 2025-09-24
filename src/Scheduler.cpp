@@ -1,13 +1,8 @@
 #include  "../h/Scheduler.hpp"
 
-Scheduler::Scheduler() {
-    queue=List<TCB>();
-}
 
-Scheduler *Scheduler::Instance() {
-    static Scheduler instance;
-    return &instance;
-}
+List<TCB> Scheduler::queue;
+
 
 TCB *Scheduler::get() {
     return queue.removeLast();

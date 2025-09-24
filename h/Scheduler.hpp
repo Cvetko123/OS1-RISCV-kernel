@@ -13,12 +13,11 @@ class TCB;
 class Scheduler
 {
 public:
-    static Scheduler* Instance();
-    void put(TCB* x);
-    TCB* get();
+
+    static void put(TCB* x);
+    static TCB* get();
 
 private:
-    Scheduler();
-    List<TCB> queue;
+    static List<TCB> queue;
 };
 #endif //PROJECT_BASE_V1_1_COPY_SCHEDULER_HPP

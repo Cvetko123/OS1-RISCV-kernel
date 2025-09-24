@@ -5,11 +5,22 @@
 #ifndef PROJECT_BASE_V1_1_COPY_TCB_HPP
 #define PROJECT_BASE_V1_1_COPY_TCB_HPP
 #include "../lib/hw.h"
-
-
+#include "../h/Scheduler.hpp"
+#include "../h/Riscv.hpp"
+#include "../h/MemoryAllocator.hpp"
 class TCB
 {
 public:
+    void* operator new(size_t size)
+{
+    return MemoryAllocator::Instance()->mem_alloc(size);
+}
+
+    void operator delete(void* ptr)
+    {
+        return MemoryAllocator::Instance()->mem_free(ptr);
+    }
+
 
     using Body=void(*)(void*);
 
@@ -18,42 +29,49 @@ public:
         delete stack;
     }
 
-    static int createThread(TCB* t, Body body, void* arg, uint64* stack);
+    static TCB* createThread(Body body, void* arg, uint64* stack);
 
     static void dispatch();
     static int exit();
 
-
-
     bool isFinished() const { return finished;}
 
-private:
-    TCB(Body body, void* arg, uint64* stack):
-    finished(false),
-    stack(body!=nullptr?((uint64*)(stack + DEFAULT_STACK_SIZE)):nullptr),
-    context(
-            {
-                    body!=nullptr?(uint64)&TCBWrapper:0,
-                    stack!=nullptr?((uint64)(uint64*)stack + DEFAULT_STACK_SIZE):0
-            }
-    ),
-    body(body)
-    {
-        this->arg=arg;
-    }
-    bool finished;
-    uint64* stack;
-    void* arg;
+
+    static TCB* running;
+
     struct Context
     {
         uint64 ra;
         uint64 sp;
     };
+
+private:
+    TCB(Body body, void* arg, uint64* stackMem)
+        : finished(false),
+          stack(stackMem),
+          arg(arg),   // now in correct order
+          id(0),      // optional init
+          context({
+              body != nullptr ? (uint64)&TCBWrapper : 0,
+              body != nullptr ? (uint64)((char*)stackMem + DEFAULT_STACK_SIZE) : 0
+          }),
+          body(body)
+    {
+        if (running == nullptr) {
+            running = this;
+        } else {
+            Scheduler::put(this);
+        }
+    }
+    bool finished;
+    uint64* stack;
+    void* arg;
+
+    int id;
+
     Context context;
     Body body;
 
-
-    static TCB* running;
     static void TCBWrapper();
 
 };
