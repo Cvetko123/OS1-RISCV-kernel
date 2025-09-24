@@ -34,8 +34,7 @@
 
 void userMain() {
     printString("Unesite broj testa? [1-7]\n");
-    int test = __getc() - '0';
-    __getc(); // Enter posle broja
+    int test = 1;
 
     if ((test >= 1 && test <= 2) || test == 7) {
         if (LEVEL_2_IMPLEMENTED == 0) {
@@ -67,7 +66,7 @@ void userMain() {
             break;
         case 2:
 #if LEVEL_2_IMPLEMENTED == 1
-            //Threads_CPP_API_test();
+            Threads_CPP_API_test();
             printString("TEST 2 (zadatak 2., niti CPP API i sinhrona promena konteksta)\n");
 #endif
             break;

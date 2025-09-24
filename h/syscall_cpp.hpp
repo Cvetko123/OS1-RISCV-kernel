@@ -19,10 +19,11 @@ public:
     virtual ~Thread ();
     int start ();
     static void dispatch ();
-    static int sleep (time_t);
+    //static int sleep (time_t);
 protected:
     Thread ();
     virtual void run () {}
+    static void wrapper(void* ptr);
 private:
     thread_t myHandle;
     void (*body)(void*); void* arg;
