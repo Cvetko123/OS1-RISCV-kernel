@@ -2,17 +2,19 @@
 #include "../h/Scheduler.hpp"
 #include  "../h/print.hpp"
 #include "../h/syscall_c.hpp"
+#include "../h/Riscv.hpp"
 
 extern "C" void context_switch(TCB::Context* oldContext, TCB::Context* newContext);
 
 TCB* TCB::running=nullptr;
+time_t TCB::timeCounter=0;
 
 TCB* TCB::createThread(Body body, void *arg, uint64 *stack) {
     return new TCB(body, arg, stack);
 }
 
 void TCB::dispatch() {
-    //printString("TCB::dispatch()\n");
+    //pprintString("TCB::dispatch()\n");
     TCB *old=running;
     if (!old->isFinished() && !old->isBlocked()) {
         Scheduler::put(old);
@@ -20,6 +22,7 @@ void TCB::dispatch() {
     running=Scheduler::get();
 
 
+    timeCounter=0;
     //Riscv::restorePrivilege();
     context_switch(&old->context, &running->context);
 }
@@ -36,7 +39,7 @@ int TCB::exit() {
 }
 
 void TCB::TCBWrapper() {
-    //printString("Entered wrapper\n");
+    //pprintString("Entered wrapper\n");
     //Riscv::restorePrivilege();
     Riscv::popSppSpie();
     running->body(running->arg);

@@ -47,30 +47,30 @@ extern void userMain();
 
 void userWrapper(void* arg)
 {
-    printString("user main start:\n");
+    pprintString("user main start:\n");
     userMain();
-    printString("user main end:\n");
+    pprintString("user main end:\n");
 }
 
 void WorkerAWrapper(void* arg)
 {
-    //printString("worker A start:\n");
+    //pprintString("worker A start:\n");
     workerBodyA();
-    //printString("worker A end:\n");
+    //pprintString("worker A end:\n");
 }
 
 void WorkerBWrapper(void* arg)
 {
-    //printString("worker B start:\n");
+    //pprintString("worker B start:\n");
     workerBodyB();
-    //printString("worker B end:\n");
+    //pprintString("worker B end:\n");
 }
 
 void WorkerCWrapper(void* arg)
 {
-    //printString("worker C start:\n");
+    //pprintString("worker C start:\n");
     workerBodyC();
-    //printString("worker C end:\n");
+    //pprintString("worker C end:\n");
 }
 
 
@@ -78,8 +78,9 @@ void WorkerCWrapper(void* arg)
 
 
 void main() {
-    Riscv::set_stvec((uint64)Riscv::SupervisorTrap);
-    //AllocatorTest();
+    Riscv::set_stvec((uint64)&Riscv::SupervisorTrap);
+    Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
+
 
 
 
@@ -97,19 +98,17 @@ void main() {
      for (auto coroutine: coroutines) { delete coroutine; }
 
      AllocatorTest();
-     printString("Finished\n");
-
-    //printString("OK\n");
+     pprintString("Finished\n");
 
 
     // size_t pom1= mem_get_free_space();
-    // printString("Free mem: ");
+    // pprintString("Free mem: ");
     // printInteger(pom1);
-    // printString("\n");
+    // pprintString("\n");
     // size_t pom2= mem_get_largest_free_block();
-    // printString("Largest free block: ");
+    // pprintString("Largest free block: ");
     // printInteger(pom2);
-    // printString("\n");
+    // pprintString("\n");
 }
 
 

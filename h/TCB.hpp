@@ -40,9 +40,12 @@ public:
     void unblock() { this->blocked = false; }
     bool isBlocked() const { return blocked; }
 
+    time_t getTimeSlice() const { return timeSlice; }
 
 
     static TCB* running;
+
+    static time_t timeCounter;
 
     struct Context
     {
@@ -62,6 +65,7 @@ private:
           body(body)
     {
         this->blocked = false;
+        this->timeSlice= DEFAULT_TIME_SLICE;
         if (running == nullptr) {
             running = this;
         } else {
@@ -72,6 +76,7 @@ private:
     uint64* stack;
     void* arg;
     bool blocked;
+    time_t timeSlice;
 
 
 

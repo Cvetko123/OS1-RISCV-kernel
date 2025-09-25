@@ -1,14 +1,20 @@
 #include  "../h/print.hpp"
+
+#include "../h/Riscv.hpp"
 #include "../lib/console.h"
+#include "../h/Riscv.hpp"
 
 
-void printString(const char *string) {
+void pprintString(const char *string) {
+
     while (*string!='\0') {
         __putc(*string);
         string++;
     }
+
 }
 void printInteger(uint64 integer) {
+
     static char digits[]="0123456789";
     char buf[16];
     int i,neg;
@@ -33,4 +39,5 @@ void printInteger(uint64 integer) {
     while (--i>=0) {
         __putc(buf[i]);
     }
+
 }

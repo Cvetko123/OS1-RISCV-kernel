@@ -30,11 +30,17 @@ void Riscv::SupervisorTrapHandler() {
     sepc=get_sepc();
     sstatus=get_sstatus();
     if (scause == 0x8000000000000001UL) {
-        // interrupt: yes; cause code: supervisor software interrupt (CLINT; machine timer interrupt)
+        // interrupt from timer
+        TCB::timeCounter++;
+        if (TCB::timeCounter >= TCB::running->getTimeSlice()) {
+            TCB::dispatch();
+            set_sepc(sepc);
+            set_sstatus(sstatus);
+        }
         mc_sip(SIP_SSIP);
     }
     else if (scause == 0x8000000000000009UL) {
-        // interrupt: yes; cause code: supervisor external interrupt (PLIC; could be keyboard)
+        // interrupt from keyboard
         console_handler();
     }
     else {
@@ -126,17 +132,17 @@ void Riscv::SupervisorTrapHandler() {
     else {
         uint64 scause= get_scause();
         uint64 stval= get_stval();
-        printString("scause:");
+        pprintString("scause:");
         printInteger(scause);
-        printString("\n");
+        pprintString("\n");
 
-        printString("stval:");
+        pprintString("stval:");
         printInteger(stval);
-        printString("\n");
+        pprintString("\n");
 
-        printString("sepc:");
+        pprintString("sepc:");
         printInteger(sepc);
-        printString("\n");
+        pprintString("\n");
         __getc();
     }
     set_sepc(sepc+4);

@@ -10,12 +10,12 @@ SEM::SEM(unsigned init) {
 }
 
 SEM* SEM::open(unsigned init) {
-    //printString("Sem::open\n ");
+    //pprintString("Sem::open\n ");
     return new SEM(init);
 }
 
 int SEM::close() {
-    //printString("Sem::close\n");
+    //pprintString("Sem::close\n");
     if (this->closed) {
         return -1;
     }
@@ -33,7 +33,7 @@ int SEM::close() {
 }
 
 int SEM::wait() {
-    //printString("Sem::wait\n");
+    //pprintString("Sem::wait\n");
     if (this->closed) {
         return -1;
     }
@@ -48,7 +48,7 @@ int SEM::wait() {
 }
 
 int SEM::signal() {
-    //printString("Sem::signal\n");
+    //pprintString("Sem::signal\n");
     if (this->closed) {
         return -1;
     }

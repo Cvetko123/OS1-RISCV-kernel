@@ -7,7 +7,7 @@
 #include "../lib/hw.h"
 
 
-extern void printString(const char* string);
+extern void pprintString(const char* string);
 
 extern void printInteger(uint64 integer);
 
