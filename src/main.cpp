@@ -66,6 +66,13 @@ void WorkerBWrapper(void* arg)
     //printString("worker B end:\n");
 }
 
+void WorkerCWrapper(void* arg)
+{
+    //printString("worker C start:\n");
+    workerBodyC();
+    //printString("worker C end:\n");
+}
+
 
 
 
@@ -76,14 +83,14 @@ void main() {
 
 
 
-     thread_t coroutines[3];
+     thread_t coroutines[4];
      thread_create(&coroutines[0],nullptr,nullptr);
-     coroutines[0]->setSysThread(true);
-     thread_create(&coroutines[1],userWrapper,nullptr);
-     //thread_create(&coroutines[2],WorkerBWrapper,nullptr);
+     thread_create(&coroutines[1],WorkerAWrapper,nullptr);
+     thread_create(&coroutines[2],WorkerBWrapper,nullptr);
+     thread_create(&coroutines[3],WorkerCWrapper,nullptr);
 
 
-     while (Scheduler::queue.size>0 ) {
+     while (Scheduler::getSize()>0 ) {
          thread_dispatch();
      }
 

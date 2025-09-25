@@ -14,13 +14,13 @@ void Riscv::popSppSpie() {
     __asm__ volatile("sret");
 }
 
-void Riscv::restorePrivilege()
-{
-    if(TCB::running->isSysThread())
-        ms_sstatus(SSTATUS_SPP);
-    else
-        mc_sstatus(SSTATUS_SPP);
-}
+// void Riscv::restorePrivilege()
+// {
+//     if(TCB::running->isSysThread())
+//         ms_sstatus(SSTATUS_SPP);
+//     else
+//         mc_sstatus(SSTATUS_SPP);
+// }
 
 
 void Riscv::SupervisorTrapHandler() {
@@ -88,6 +88,40 @@ void Riscv::SupervisorTrapHandler() {
     }
     else if (syscode==THREAD_DISPATCH) {
         TCB::dispatch();
+    }
+    else if (syscode==SEM_OPEN) {
+        sem_t* handle;
+        unsigned init;
+        __asm__ volatile ("mv %[x], a1" : [x] "=r" (handle));
+        __asm__ volatile ("mv %[x], a2" : [x] "=r" (init));
+
+        *handle=SEM::open(init);
+        int ret=0;
+        if (*handle) {
+            ret=0;
+        }
+        else {
+            ret=1;
+        }
+        __asm__ volatile ("mv a0, %[x]" :: [x] "r" (ret));
+    }
+    else if (syscode==SEM_CLOSE) {
+        sem_t handle;
+        __asm__ volatile ("mv %[x], a1" : [x] "=r" (handle));
+        int ret=handle->close();
+        __asm__ volatile ("mv a0, %[x]" :: [x] "r" (ret));
+    }
+    else if (syscode==SEM_WAIT) {
+        sem_t handle;
+        __asm__ volatile ("mv %[x], a1" : [x] "=r" (handle));
+        int ret=handle->wait();
+        __asm__ volatile ("mv a0, %[x]" :: [x] "r" (ret));
+    }
+    else if (syscode==SEM_SIGNAL) {
+        sem_t handle;
+        __asm__ volatile ("mv %[x], a1" : [x] "=r" (handle));
+        int ret=handle->signal();
+        __asm__ volatile ("mv a0, %[x]" :: [x] "r" (ret));
     }
     else {
         uint64 scause= get_scause();

@@ -6,7 +6,10 @@
 #define PROJECT_BASE_V1_1_COPY_SYSCALL_CPP_HPP
 #include "../lib/hw.h"
 #include "TCB.hpp"
+#include "SEM.hpp"
+
 typedef TCB* thread_t;
+typedef SEM* sem_t;
 
 
 void* operator new (size_t);
@@ -27,6 +30,16 @@ protected:
 private:
     thread_t myHandle;
     void (*body)(void*); void* arg;
+};
+
+class Semaphore {
+public:
+    Semaphore (unsigned init = 1);
+    virtual ~Semaphore ();
+    int wait ();
+    int signal ();
+private:
+    sem_t myHandle;
 };
 
 

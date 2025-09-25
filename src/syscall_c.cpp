@@ -77,3 +77,40 @@ void thread_dispatch()
     invoke(THREAD_DISPATCH);
 }
 
+
+int sem_open(sem_t* handle, unsigned init)
+{
+    __asm__ volatile ("mv a2, %[x]" :: [x] "r" (init));
+    __asm__ volatile ("mv a1, %[x]" :: [x] "r" (handle));
+    invoke(SEM_OPEN);
+    uint64 ret;
+    __asm__ volatile ("mv %[x], a0" : [x] "=r" (ret));
+    return (int)ret;
+}
+
+int sem_close(sem_t handle)
+{
+    __asm__ volatile ("mv a1, %[x]" :: [x] "r" (handle));
+    invoke(SEM_CLOSE);
+    uint64 ret;
+    __asm__ volatile ("mv %[x], a0" : [x] "=r" (ret));
+    return (int)ret;
+}
+
+int sem_wait(sem_t id)
+{
+    __asm__ volatile ("mv a1, %[x]" :: [x] "r" (id));
+    invoke(SEM_WAIT);
+    uint64 ret;
+    __asm__ volatile ("mv %[x], a0" : [x] "=r" (ret));
+    return (int)ret;
+}
+
+int sem_signal(sem_t id)
+{
+    __asm__ volatile ("mv a1, %[x]" :: [x] "r" (id));
+    invoke(SEM_SIGNAL);
+    uint64 ret;
+    __asm__ volatile ("mv %[x], a0" : [x] "=r" (ret));
+    return (int)ret;
+}

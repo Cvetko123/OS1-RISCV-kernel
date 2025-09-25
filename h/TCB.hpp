@@ -6,8 +6,8 @@
 #define PROJECT_BASE_V1_1_COPY_TCB_HPP
 #include "../lib/hw.h"
 #include "../h/Scheduler.hpp"
-#include "../h/Riscv.hpp"
 #include "../h/MemoryAllocator.hpp"
+
 class TCB
 {
 public:
@@ -36,9 +36,10 @@ public:
 
     bool isFinished() const { return finished;}
 
-    void setSysThread(bool sysThread) { this->sysThread = sysThread; }
+    void block() { this->blocked = true; }
+    void unblock() { this->blocked = false; }
+    bool isBlocked() const { return blocked; }
 
-    bool isSysThread() const { return sysThread; }
 
 
     static TCB* running;
@@ -50,7 +51,7 @@ public:
     };
 
 private:
-    TCB(Body body, void* arg, uint64* stackMem,bool sysThread=false)
+    TCB(Body body, void* arg, uint64* stackMem)
         : finished(false),
           stack(stackMem),
           arg(arg),   // now in correct order
@@ -60,7 +61,7 @@ private:
           }),
           body(body)
     {
-        this->sysThread = sysThread;
+        this->blocked = false;
         if (running == nullptr) {
             running = this;
         } else {
@@ -70,7 +71,7 @@ private:
     bool finished;
     uint64* stack;
     void* arg;
-    bool sysThread;
+    bool blocked;
 
 
 

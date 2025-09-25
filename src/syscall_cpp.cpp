@@ -27,7 +27,9 @@ Thread::Thread() {
     body=nullptr;
     arg=nullptr;
 }
-Thread::~Thread() { }
+Thread::~Thread() {
+    delete myHandle;
+}
 
 int Thread::start() {
     int ret=0;
@@ -44,4 +46,20 @@ int Thread::start() {
 void Thread::wrapper(void* ptr)
 {
     ((Thread*)ptr)->run();
+}
+
+Semaphore::Semaphore(unsigned init) {
+
+    sem_open(&myHandle, init);
+}
+
+Semaphore::~Semaphore() {
+    sem_close(myHandle);
+}
+int Semaphore::wait() {
+    return sem_wait(myHandle);
+}
+
+int Semaphore::signal() {
+    return sem_signal(myHandle);
 }
