@@ -17,7 +17,6 @@ public:
     static void put(TCB* x);
     static TCB* get();
 
-private:
     static List<TCB> queue;
 };
 #endif //PROJECT_BASE_V1_1_COPY_SCHEDULER_HPP

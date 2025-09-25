@@ -15,31 +15,34 @@ public:
     static uint64 get_sstatus();
     static uint64 get_scause();
     static uint64 get_stval();
+    static void ms_sstatus(uint64 mask);
     static void mc_sstatus(uint64 mask);
     static void mc_sip(uint64 mask);
+    static void ms_sie(uint64 mask);
     enum BitMaskSstatus
     {
         SSTATUS_SIE=(1UL<<1),
         SSTATUS_SPIE=(1UL<<5),
         SSTATUS_SPP=(1UL<<8)
     };
-    enum BitMasSip: uint64
+    enum BitMaskSip: uint64
     {
         SIP_SSIP=(1UL<<1),
         SIP_STIP=(1UL<<5),
         SIP_SEIP=(1UL<<9)
     };
-    enum BitMasSie: uint64
+    enum BitMaskSie: uint64
     {
         SIE_SSIE=(1UL<<1),
         SIE_SEIE=(1UL<<9)
     };
 
-    static void pushRegisters();
-    static void popRegisters();
+
+    static void SupervisorTrap();
 
     static void restorePrivilege();
     static void popSppSpie();
+
 
 
     static void SupervisorTrapHandler();
@@ -80,11 +83,19 @@ inline uint64 Riscv::get_stval() {
     __asm__ volatile("csrr %[stval], stval":[stval]"=r"(stval));
     return stval;
 }
+inline void Riscv::ms_sstatus(uint64 mask) {
+    __asm__ volatile("csrs sstatus,%[mask]"::[mask]"r"(mask));
+}
 inline void Riscv::mc_sstatus(uint64 mask) {
     __asm__ volatile("csrc sstatus,%[mask]"::[mask]"r"(mask));
 }
 inline void Riscv::mc_sip(uint64 mask)
 {
     __asm__ volatile("csrc sip, %[mask]":: [mask]"r"(mask));
+}
+
+inline void Riscv::ms_sie(uint64 mask)
+{
+    __asm__ volatile("csrs sie, %[mask]":: [mask]"r"(mask));
 }
 #endif //PROJECT_BASE_V1_1_COPY_RISCV_HPP

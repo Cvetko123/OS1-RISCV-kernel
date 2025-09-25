@@ -10,7 +10,8 @@ enum syscallCodes {
     MEM_GET_LARGEST_FREE_BLOCK=0x04,
     THREAD_CREATE=0x11,
     THREAD_EXIT=0x12,
-    THREAD_DISPATCH=0x13
+    THREAD_DISPATCH=0x13,
+    CHANGE_USER=0x25,
 };
 
 
@@ -30,6 +31,8 @@ int thread_create(thread_t* handle,void(*start_routine)(void*), void* arg);
 int thread_exit();
 
 void thread_dispatch();
+
+
 
 
 

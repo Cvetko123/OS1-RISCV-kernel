@@ -62,7 +62,7 @@ static void workerBodyC(void* arg) {
         printString("C: i="); printInteger(i); printString("\n");
     }
 
-    printString("A finished!\n");
+    printString("C finished!\n");
     finishedC = true;
     thread_dispatch();
 }

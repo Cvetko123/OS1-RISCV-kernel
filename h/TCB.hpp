@@ -36,6 +36,10 @@ public:
 
     bool isFinished() const { return finished;}
 
+    void setSysThread(bool sysThread) { this->sysThread = sysThread; }
+
+    bool isSysThread() const { return sysThread; }
+
 
     static TCB* running;
 
@@ -46,17 +50,17 @@ public:
     };
 
 private:
-    TCB(Body body, void* arg, uint64* stackMem)
+    TCB(Body body, void* arg, uint64* stackMem,bool sysThread=false)
         : finished(false),
           stack(stackMem),
           arg(arg),   // now in correct order
-          id(0),      // optional init
           context({
               body != nullptr ? (uint64)&TCBWrapper : 0,
               body != nullptr ? (uint64)((char*)stackMem + DEFAULT_STACK_SIZE) : 0
           }),
           body(body)
     {
+        this->sysThread = sysThread;
         if (running == nullptr) {
             running = this;
         } else {
@@ -66,8 +70,9 @@ private:
     bool finished;
     uint64* stack;
     void* arg;
+    bool sysThread;
 
-    int id;
+
 
     Context context;
     Body body;

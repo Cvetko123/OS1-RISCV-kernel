@@ -19,7 +19,7 @@ private:
     };
     Elem * head;
     Elem *tail;
-    int size=0;
+
 public:
     List(): head(0), tail(0){}
     void addFirst(T* data)
@@ -43,6 +43,7 @@ public:
         delete elem;
         return retval;
     }
+    int size=0;
 };
 
 #endif //PROJECT_BASE_V1_1_COPY_LIST_HPP

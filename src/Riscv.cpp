@@ -8,9 +8,7 @@
 #include "../h/MemoryAllocator.hpp"
 #include  "../h/print.hpp"
 using Body=void(*)(void*);
-extern  "C" void SupervisorTrapHandlerWrapper() {
-    Riscv::SupervisorTrapHandler();
-}
+
 void Riscv::popSppSpie() {
     __asm__ volatile("csrw sepc, ra");
     __asm__ volatile("sret");
@@ -18,7 +16,10 @@ void Riscv::popSppSpie() {
 
 void Riscv::restorePrivilege()
 {
-    mc_sstatus(SSTATUS_SPP);
+    if(TCB::running->isSysThread())
+        ms_sstatus(SSTATUS_SPP);
+    else
+        mc_sstatus(SSTATUS_SPP);
 }
 
 

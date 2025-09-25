@@ -36,6 +36,7 @@ void userMain() {
     printString("Unesite broj testa? [1-7]\n");
     int test = 1;
 
+
     if ((test >= 1 && test <= 2) || test == 7) {
         if (LEVEL_2_IMPLEMENTED == 0) {
             printString("Nije navedeno da je zadatak 2 implementiran\n");

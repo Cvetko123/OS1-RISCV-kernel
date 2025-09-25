@@ -1,6 +1,7 @@
 #include "../h/TCB.hpp"
 #include "../h/Scheduler.hpp"
 #include  "../h/print.hpp"
+#include "../h/syscall_c.hpp"
 
 extern "C" void context_switch(TCB::Context* oldContext, TCB::Context* newContext);
 
@@ -19,10 +20,8 @@ void TCB::dispatch() {
     running=Scheduler::get();
 
 
-    Riscv::pushRegisters();
     //Riscv::restorePrivilege();
     context_switch(&old->context, &running->context);
-    Riscv::popRegisters();
 }
 
 
@@ -32,14 +31,14 @@ int TCB::exit() {
         return -1;
     }
     running->finished=true;
-    dispatch();
+    thread_dispatch();
     return 0;
 }
 
 void TCB::TCBWrapper() {
     //printString("Entered wrapper\n");
     //Riscv::restorePrivilege();
-    //Riscv::popSppSpie();
+    Riscv::popSppSpie();
     running->body(running->arg);
     exit();
 }

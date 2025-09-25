@@ -66,21 +66,25 @@ void WorkerBWrapper(void* arg)
     //printString("worker B end:\n");
 }
 
-extern "C" void SupervisorTrap();
+
 
 
 
 void main() {
-    Riscv::set_stvec((uint64)SupervisorTrap);
+    Riscv::set_stvec((uint64)Riscv::SupervisorTrap);
     //AllocatorTest();
 
-     thread_t coroutines[2];
+
+
+     thread_t coroutines[3];
      thread_create(&coroutines[0],nullptr,nullptr);
+     coroutines[0]->setSysThread(true);
      thread_create(&coroutines[1],userWrapper,nullptr);
+     //thread_create(&coroutines[2],WorkerBWrapper,nullptr);
 
 
-     while (!coroutines[1]->isFinished()) {
-         TCB::dispatch();
+     while (Scheduler::queue.size>0 ) {
+         thread_dispatch();
      }
 
      for (auto coroutine: coroutines) { delete coroutine; }
