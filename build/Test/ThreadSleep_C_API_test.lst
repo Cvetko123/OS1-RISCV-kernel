@@ -1,0 +1,484 @@
+GAS LISTING /tmp/ccSD5aIK.s 			page 1
+
+
+   1              		.file	"ThreadSleep_C_API_test.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.text
+   5              	.Ltext0:
+   6              		.section	.rodata.str1.8,"aMS",@progbits,1
+   7              		.align	3
+   8              	.LC0:
+   9 0000 48656C6C 		.string	"Hello "
+   9      6F2000
+  10 0007 00       		.align	3
+  11              	.LC1:
+  12 0008 20210A00 		.string	" !\n"
+  13              		.text
+  14              		.align	2
+  16              	_ZL9sleepyRunPv:
+  17              	.LFB19:
+  18              		.file 1 "Test/ThreadSleep_C_API_test.cpp"
+   1:Test/ThreadSleep_C_API_test.cpp **** #include "../h/syscall_c.hpp"
+   2:Test/ThreadSleep_C_API_test.cpp **** 
+   3:Test/ThreadSleep_C_API_test.cpp **** #include "printing.hpp"
+   4:Test/ThreadSleep_C_API_test.cpp **** 
+   5:Test/ThreadSleep_C_API_test.cpp **** static  bool finished[2];
+   6:Test/ThreadSleep_C_API_test.cpp **** 
+   7:Test/ThreadSleep_C_API_test.cpp **** static void sleepyRun(void *arg) {
+  19              		.loc 1 7 34
+  20              		.cfi_startproc
+  21              	.LVL0:
+  22 0000 130101FE 		addi	sp,sp,-32
+  23              		.cfi_def_cfa_offset 32
+  24 0004 233C1100 		sd	ra,24(sp)
+  25 0008 23388100 		sd	s0,16(sp)
+  26 000c 23349100 		sd	s1,8(sp)
+  27 0010 23302101 		sd	s2,0(sp)
+  28              		.cfi_offset 1, -8
+  29              		.cfi_offset 8, -16
+  30              		.cfi_offset 9, -24
+  31              		.cfi_offset 18, -32
+  32 0014 13040102 		addi	s0,sp,32
+  33              		.cfi_def_cfa 8, 0
+   8:Test/ThreadSleep_C_API_test.cpp ****     time_t sleep_time = *((time_t *) arg);
+  34              		.loc 1 8 5
+  35              		.loc 1 8 12 is_stmt 0
+  36 0018 03390500 		ld	s2,0(a0)
+  37              	.LVL1:
+   9:Test/ThreadSleep_C_API_test.cpp ****     int i = 6;
+  38              		.loc 1 9 5 is_stmt 1
+  39              		.loc 1 9 9 is_stmt 0
+  40 001c 93046000 		li	s1,6
+  41              	.LVL2:
+  42              	.L3:
+  10:Test/ThreadSleep_C_API_test.cpp ****     while (--i > 0) {
+  43              		.loc 1 10 5 is_stmt 1
+  44              		.loc 1 10 16
+  45 0020 9B84F4FF 		addiw	s1,s1,-1
+  46              	.LVL3:
+  47 0024 63549004 		blez	s1,.L2
+GAS LISTING /tmp/ccSD5aIK.s 			page 2
+
+
+  11:Test/ThreadSleep_C_API_test.cpp **** 
+  12:Test/ThreadSleep_C_API_test.cpp ****         printString("Hello ");
+  48              		.loc 1 12 9
+  49              		.loc 1 12 20 is_stmt 0
+  50 0028 17050000 		lla	a0,.LC0
+  50      13050500 
+  51 0030 97000000 		call	_Z11printStringPKc@plt
+  51      E7800000 
+  52              	.LVL4:
+  13:Test/ThreadSleep_C_API_test.cpp ****         printInt(sleep_time);
+  53              		.loc 1 13 9 is_stmt 1
+  54              		.loc 1 13 17 is_stmt 0
+  55 0038 13060000 		li	a2,0
+  56 003c 9305A000 		li	a1,10
+  57 0040 1B050900 		sext.w	a0,s2
+  58 0044 97000000 		call	_Z8printIntiii@plt
+  58      E7800000 
+  59              	.LVL5:
+  14:Test/ThreadSleep_C_API_test.cpp ****         printString(" !\n");
+  60              		.loc 1 14 9 is_stmt 1
+  61              		.loc 1 14 20 is_stmt 0
+  62 004c 17050000 		lla	a0,.LC1
+  62      13050500 
+  63 0054 97000000 		call	_Z11printStringPKc@plt
+  63      E7800000 
+  64              	.LVL6:
+  15:Test/ThreadSleep_C_API_test.cpp ****         time_sleep(sleep_time);
+  65              		.loc 1 15 9 is_stmt 1
+  66              		.loc 1 15 19 is_stmt 0
+  67 005c 13050900 		mv	a0,s2
+  68 0060 97000000 		call	_Z10time_sleepm@plt
+  68      E7800000 
+  69              	.LVL7:
+  10:Test/ThreadSleep_C_API_test.cpp **** 
+  70              		.loc 1 10 5
+  71 0068 6FF09FFB 		j	.L3
+  72              	.L2:
+  16:Test/ThreadSleep_C_API_test.cpp ****     }
+  17:Test/ThreadSleep_C_API_test.cpp ****     finished[sleep_time/10-1] = true;
+  73              		.loc 1 17 5 is_stmt 1
+  74              		.loc 1 17 24 is_stmt 0
+  75 006c 9307A000 		li	a5,10
+  76 0070 3359F902 		divu	s2,s2,a5
+  77              	.LVL8:
+  78              		.loc 1 17 27
+  79 0074 1309F9FF 		addi	s2,s2,-1
+  80              		.loc 1 17 31
+  81 0078 97070000 		lla	a5,.LANCHOR0
+  81      93870700 
+  82 0080 33892701 		add	s2,a5,s2
+  83 0084 93071000 		li	a5,1
+  84 0088 2300F900 		sb	a5,0(s2)
+  18:Test/ThreadSleep_C_API_test.cpp **** }
+  85              		.loc 1 18 1
+  86 008c 83308101 		ld	ra,24(sp)
+  87              		.cfi_restore 1
+  88 0090 03340101 		ld	s0,16(sp)
+GAS LISTING /tmp/ccSD5aIK.s 			page 3
+
+
+  89              		.cfi_restore 8
+  90              		.cfi_def_cfa 2, 32
+  91 0094 83348100 		ld	s1,8(sp)
+  92              		.cfi_restore 9
+  93 0098 03390100 		ld	s2,0(sp)
+  94              		.cfi_restore 18
+  95 009c 13010102 		addi	sp,sp,32
+  96              		.cfi_def_cfa_offset 0
+  97 00a0 67800000 		jr	ra
+  98              		.cfi_endproc
+  99              	.LFE19:
+ 101              		.align	2
+ 102              		.globl	_Z12testSleepingv
+ 104              	_Z12testSleepingv:
+ 105              	.LFB20:
+  19:Test/ThreadSleep_C_API_test.cpp **** 
+  20:Test/ThreadSleep_C_API_test.cpp **** void testSleeping() {
+ 106              		.loc 1 20 21 is_stmt 1
+ 107              		.cfi_startproc
+ 108 00a4 130101FC 		addi	sp,sp,-64
+ 109              		.cfi_def_cfa_offset 64
+ 110 00a8 233C1102 		sd	ra,56(sp)
+ 111 00ac 23388102 		sd	s0,48(sp)
+ 112 00b0 23349102 		sd	s1,40(sp)
+ 113              		.cfi_offset 1, -8
+ 114              		.cfi_offset 8, -16
+ 115              		.cfi_offset 9, -24
+ 116 00b4 13040104 		addi	s0,sp,64
+ 117              		.cfi_def_cfa 8, 0
+  21:Test/ThreadSleep_C_API_test.cpp ****     const int sleepy_thread_count = 2;
+ 118              		.loc 1 21 5
+ 119              	.LVL9:
+  22:Test/ThreadSleep_C_API_test.cpp ****     time_t sleep_times[sleepy_thread_count] = {10, 20};
+ 120              		.loc 1 22 5
+ 121              		.loc 1 22 12 is_stmt 0
+ 122 00b8 9307A000 		li	a5,10
+ 123 00bc 2338F4FC 		sd	a5,-48(s0)
+ 124 00c0 93074001 		li	a5,20
+ 125 00c4 233CF4FC 		sd	a5,-40(s0)
+  23:Test/ThreadSleep_C_API_test.cpp ****     thread_t sleepyThread[sleepy_thread_count];
+ 126              		.loc 1 23 5 is_stmt 1
+  24:Test/ThreadSleep_C_API_test.cpp **** 
+  25:Test/ThreadSleep_C_API_test.cpp ****     for (int i = 0; i < sleepy_thread_count; i++) {
+ 127              		.loc 1 25 5
+ 128              	.LVL10:
+ 129              	.LBB2:
+ 130              		.loc 1 25 14 is_stmt 0
+ 131 00c8 93040000 		li	s1,0
+ 132 00cc 6F00C002 		j	.L7
+ 133              	.LVL11:
+ 134              	.L11:
+  26:Test/ThreadSleep_C_API_test.cpp ****         thread_create(&sleepyThread[i], sleepyRun, sleep_times + i);
+ 135              		.loc 1 26 9 is_stmt 1
+ 136              		.loc 1 26 64 is_stmt 0
+ 137 00d0 93973400 		slli	a5,s1,3
+ 138              		.loc 1 26 22
+ 139 00d4 130604FD 		addi	a2,s0,-48
+GAS LISTING /tmp/ccSD5aIK.s 			page 4
+
+
+ 140 00d8 3306F600 		add	a2,a2,a5
+ 141 00dc 97050000 		lla	a1,_ZL9sleepyRunPv
+ 141      93850500 
+ 142 00e4 130504FC 		addi	a0,s0,-64
+ 143 00e8 3305F500 		add	a0,a0,a5
+ 144 00ec 97000000 		call	_Z13thread_createPP3TCBPFvPvES2_@plt
+ 144      E7800000 
+ 145              	.LVL12:
+  25:Test/ThreadSleep_C_API_test.cpp ****         thread_create(&sleepyThread[i], sleepyRun, sleep_times + i);
+ 146              		.loc 1 25 5 is_stmt 1
+ 147 00f4 9B841400 		addiw	s1,s1,1
+ 148              	.LVL13:
+ 149              	.L7:
+  25:Test/ThreadSleep_C_API_test.cpp ****         thread_create(&sleepyThread[i], sleepyRun, sleep_times + i);
+ 150              		.loc 1 25 23 discriminator 1
+ 151 00f8 93071000 		li	a5,1
+ 152 00fc E3DA97FC 		ble	s1,a5,.L11
+ 153 0100 6F00C000 		j	.L6
+ 154              	.L8:
+ 155              	.LBE2:
+  27:Test/ThreadSleep_C_API_test.cpp ****     }
+  28:Test/ThreadSleep_C_API_test.cpp **** 
+  29:Test/ThreadSleep_C_API_test.cpp ****     while (!(finished[0] && finished[1])) {
+  30:Test/ThreadSleep_C_API_test.cpp ****         thread_dispatch();
+ 156              		.loc 1 30 9
+ 157              		.loc 1 30 24 is_stmt 0
+ 158 0104 97000000 		call	_Z15thread_dispatchv@plt
+ 158      E7800000 
+ 159              	.LVL14:
+ 160              	.L6:
+  29:Test/ThreadSleep_C_API_test.cpp ****         thread_dispatch();
+ 161              		.loc 1 29 5 is_stmt 1
+  29:Test/ThreadSleep_C_API_test.cpp ****         thread_dispatch();
+ 162              		.loc 1 29 12
+  29:Test/ThreadSleep_C_API_test.cpp ****         thread_dispatch();
+ 163              		.loc 1 29 24 is_stmt 0
+ 164 010c 97070000 		lbu	a5,.LANCHOR0
+ 164      83C70700 
+  29:Test/ThreadSleep_C_API_test.cpp ****         thread_dispatch();
+ 165              		.loc 1 29 12
+ 166 0114 E38807FE 		beqz	a5,.L8
+  29:Test/ThreadSleep_C_API_test.cpp ****         thread_dispatch();
+ 167              		.loc 1 29 39 discriminator 1
+ 168 0118 97070000 		lbu	a5,.LANCHOR0+1
+ 168      83C70700 
+  29:Test/ThreadSleep_C_API_test.cpp ****         thread_dispatch();
+ 169              		.loc 1 29 12 discriminator 1
+ 170 0120 E38207FE 		beqz	a5,.L8
+  31:Test/ThreadSleep_C_API_test.cpp ****     }
+  32:Test/ThreadSleep_C_API_test.cpp **** }
+ 171              		.loc 1 32 1
+ 172 0124 83308103 		ld	ra,56(sp)
+ 173              		.cfi_restore 1
+ 174 0128 03340103 		ld	s0,48(sp)
+ 175              		.cfi_restore 8
+ 176              		.cfi_def_cfa 2, 64
+ 177 012c 83348102 		ld	s1,40(sp)
+GAS LISTING /tmp/ccSD5aIK.s 			page 5
+
+
+ 178              		.cfi_restore 9
+ 179              	.LVL15:
+ 180 0130 13010104 		addi	sp,sp,64
+ 181              		.cfi_def_cfa_offset 0
+ 182 0134 67800000 		jr	ra
+ 183              		.cfi_endproc
+ 184              	.LFE20:
+ 186              		.bss
+ 187              		.align	3
+ 188              		.set	.LANCHOR0,. + 0
+ 191              	_ZL8finished:
+ 192 0000 0000     		.zero	2
+ 193              		.text
+ 194              	.Letext0:
+ 195              		.file 2 "Test/../h/../lib/hw.h"
+ 196              		.file 3 "Test/../h/TCB.hpp"
+ 197              		.file 4 "Test/../h/syscall_c.hpp"
+ 198              		.file 5 "Test/printing.hpp"
+GAS LISTING /tmp/ccSD5aIK.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ThreadSleep_C_API_test.cpp
+     /tmp/ccSD5aIK.s:16     .text:0000000000000000 _ZL9sleepyRunPv
+     /tmp/ccSD5aIK.s:20     .text:0000000000000000 .L0 
+     /tmp/ccSD5aIK.s:22     .text:0000000000000000 .L0 
+     /tmp/ccSD5aIK.s:23     .text:0000000000000004 .L0 
+     /tmp/ccSD5aIK.s:28     .text:0000000000000014 .L0 
+     /tmp/ccSD5aIK.s:29     .text:0000000000000014 .L0 
+     /tmp/ccSD5aIK.s:30     .text:0000000000000014 .L0 
+     /tmp/ccSD5aIK.s:31     .text:0000000000000014 .L0 
+     /tmp/ccSD5aIK.s:33     .text:0000000000000018 .L0 
+     /tmp/ccSD5aIK.s:35     .text:0000000000000018 .L0 
+     /tmp/ccSD5aIK.s:36     .text:0000000000000018 .L0 
+     /tmp/ccSD5aIK.s:39     .text:000000000000001c .L0 
+     /tmp/ccSD5aIK.s:40     .text:000000000000001c .L0 
+     /tmp/ccSD5aIK.s:44     .text:0000000000000020 .L0 
+     /tmp/ccSD5aIK.s:45     .text:0000000000000020 .L0 
+     /tmp/ccSD5aIK.s:49     .text:0000000000000028 .L0 
+     /tmp/ccSD5aIK.s:50     .text:0000000000000028 .L0 
+     /tmp/ccSD5aIK.s:54     .text:0000000000000038 .L0 
+     /tmp/ccSD5aIK.s:55     .text:0000000000000038 .L0 
+     /tmp/ccSD5aIK.s:61     .text:000000000000004c .L0 
+     /tmp/ccSD5aIK.s:62     .text:000000000000004c .L0 
+     /tmp/ccSD5aIK.s:66     .text:000000000000005c .L0 
+     /tmp/ccSD5aIK.s:67     .text:000000000000005c .L0 
+     /tmp/ccSD5aIK.s:71     .text:0000000000000068 .L0 
+     /tmp/ccSD5aIK.s:74     .text:000000000000006c .L0 
+     /tmp/ccSD5aIK.s:75     .text:000000000000006c .L0 
+     /tmp/ccSD5aIK.s:79     .text:0000000000000074 .L0 
+     /tmp/ccSD5aIK.s:81     .text:0000000000000078 .L0 
+     /tmp/ccSD5aIK.s:86     .text:000000000000008c .L0 
+     /tmp/ccSD5aIK.s:87     .text:0000000000000090 .L0 
+     /tmp/ccSD5aIK.s:89     .text:0000000000000094 .L0 
+     /tmp/ccSD5aIK.s:90     .text:0000000000000094 .L0 
+     /tmp/ccSD5aIK.s:92     .text:0000000000000098 .L0 
+     /tmp/ccSD5aIK.s:94     .text:000000000000009c .L0 
+     /tmp/ccSD5aIK.s:96     .text:00000000000000a0 .L0 
+     /tmp/ccSD5aIK.s:98     .text:00000000000000a4 .L0 
+     /tmp/ccSD5aIK.s:104    .text:00000000000000a4 _Z12testSleepingv
+     /tmp/ccSD5aIK.s:107    .text:00000000000000a4 .L0 
+     /tmp/ccSD5aIK.s:108    .text:00000000000000a4 .L0 
+     /tmp/ccSD5aIK.s:109    .text:00000000000000a8 .L0 
+     /tmp/ccSD5aIK.s:113    .text:00000000000000b4 .L0 
+     /tmp/ccSD5aIK.s:114    .text:00000000000000b4 .L0 
+     /tmp/ccSD5aIK.s:115    .text:00000000000000b4 .L0 
+     /tmp/ccSD5aIK.s:117    .text:00000000000000b8 .L0 
+     /tmp/ccSD5aIK.s:120    .text:00000000000000b8 .L0 
+     /tmp/ccSD5aIK.s:121    .text:00000000000000b8 .L0 
+     /tmp/ccSD5aIK.s:122    .text:00000000000000b8 .L0 
+     /tmp/ccSD5aIK.s:127    .text:00000000000000c8 .L0 
+     /tmp/ccSD5aIK.s:130    .text:00000000000000c8 .L0 
+     /tmp/ccSD5aIK.s:131    .text:00000000000000c8 .L0 
+     /tmp/ccSD5aIK.s:136    .text:00000000000000d0 .L0 
+     /tmp/ccSD5aIK.s:137    .text:00000000000000d0 .L0 
+     /tmp/ccSD5aIK.s:139    .text:00000000000000d4 .L0 
+     /tmp/ccSD5aIK.s:147    .text:00000000000000f4 .L0 
+     /tmp/ccSD5aIK.s:151    .text:00000000000000f8 .L0 
+GAS LISTING /tmp/ccSD5aIK.s 			page 7
+
+
+     /tmp/ccSD5aIK.s:157    .text:0000000000000104 .L0 
+     /tmp/ccSD5aIK.s:158    .text:0000000000000104 .L0 
+     /tmp/ccSD5aIK.s:162    .text:000000000000010c .L0 
+     /tmp/ccSD5aIK.s:163    .text:000000000000010c .L0 
+     /tmp/ccSD5aIK.s:164    .text:000000000000010c .L0 
+     /tmp/ccSD5aIK.s:166    .text:0000000000000114 .L0 
+     /tmp/ccSD5aIK.s:168    .text:0000000000000118 .L0 
+     /tmp/ccSD5aIK.s:170    .text:0000000000000120 .L0 
+     /tmp/ccSD5aIK.s:172    .text:0000000000000124 .L0 
+     /tmp/ccSD5aIK.s:173    .text:0000000000000128 .L0 
+     /tmp/ccSD5aIK.s:175    .text:000000000000012c .L0 
+     /tmp/ccSD5aIK.s:176    .text:000000000000012c .L0 
+     /tmp/ccSD5aIK.s:178    .text:0000000000000130 .L0 
+     /tmp/ccSD5aIK.s:181    .text:0000000000000134 .L0 
+     /tmp/ccSD5aIK.s:183    .text:0000000000000138 .L0 
+     /tmp/ccSD5aIK.s:188    .bss:0000000000000000 .LANCHOR0
+     /tmp/ccSD5aIK.s:191    .bss:0000000000000000 _ZL8finished
+     /tmp/ccSD5aIK.s:199    .text:0000000000000138 .L0 
+     /tmp/ccSD5aIK.s:8      .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccSD5aIK.s:50     .text:0000000000000028 .L0 
+     /tmp/ccSD5aIK.s:11     .rodata.str1.8:0000000000000008 .LC1
+     /tmp/ccSD5aIK.s:62     .text:000000000000004c .L0 
+     /tmp/ccSD5aIK.s:81     .text:0000000000000078 .L0 
+     /tmp/ccSD5aIK.s:141    .text:00000000000000dc .L0 
+     /tmp/ccSD5aIK.s:164    .text:000000000000010c .L0 
+     /tmp/ccSD5aIK.s:168    .text:0000000000000118 .L0 
+     /tmp/ccSD5aIK.s:72     .text:000000000000006c .L2
+     /tmp/ccSD5aIK.s:42     .text:0000000000000020 .L3
+     /tmp/ccSD5aIK.s:149    .text:00000000000000f8 .L7
+     /tmp/ccSD5aIK.s:134    .text:00000000000000d0 .L11
+     /tmp/ccSD5aIK.s:160    .text:000000000000010c .L6
+     /tmp/ccSD5aIK.s:154    .text:0000000000000104 .L8
+     /tmp/ccSD5aIK.s:920    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccSD5aIK.s:1870   .debug_str:000000000000044b .LASF69
+     /tmp/ccSD5aIK.s:1760   .debug_str:0000000000000133 .LASF70
+     /tmp/ccSD5aIK.s:1810   .debug_str:0000000000000289 .LASF71
+     /tmp/ccSD5aIK.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccSD5aIK.s:194    .text:0000000000000138 .Letext0
+     /tmp/ccSD5aIK.s:1716   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccSD5aIK.s:1818   .debug_str:00000000000002dd .LASF0
+     /tmp/ccSD5aIK.s:1832   .debug_str:0000000000000323 .LASF1
+     /tmp/ccSD5aIK.s:1808   .debug_str:000000000000027b .LASF2
+     /tmp/ccSD5aIK.s:1786   .debug_str:00000000000001f3 .LASF4
+     /tmp/ccSD5aIK.s:1864   .debug_str:000000000000041d .LASF3
+     /tmp/ccSD5aIK.s:1736   .debug_str:0000000000000085 .LASF5
+     /tmp/ccSD5aIK.s:1758   .debug_str:000000000000012c .LASF6
+     /tmp/ccSD5aIK.s:1838   .debug_str:0000000000000366 .LASF7
+     /tmp/ccSD5aIK.s:1816   .debug_str:00000000000002ca .LASF8
+     /tmp/ccSD5aIK.s:1878   .debug_str:000000000000053e .LASF9
+     /tmp/ccSD5aIK.s:1780   .debug_str:00000000000001c7 .LASF10
+     /tmp/ccSD5aIK.s:1844   .debug_str:000000000000039a .LASF11
+     /tmp/ccSD5aIK.s:1874   .debug_str:0000000000000519 .LASF12
+     /tmp/ccSD5aIK.s:1740   .debug_str:0000000000000094 .LASF13
+     /tmp/ccSD5aIK.s:1722   .debug_str:0000000000000011 .LASF14
+     /tmp/ccSD5aIK.s:1748   .debug_str:00000000000000d1 .LASF15
+     /tmp/ccSD5aIK.s:1858   .debug_str:00000000000003f2 .LASF16
+     /tmp/ccSD5aIK.s:1754   .debug_str:0000000000000108 .LASF17
+GAS LISTING /tmp/ccSD5aIK.s 			page 8
+
+
+     /tmp/ccSD5aIK.s:1726   .debug_str:000000000000002b .LASF72
+     /tmp/ccSD5aIK.s:1880   .debug_str:000000000000054e .LASF18
+     /tmp/ccSD5aIK.s:1868   .debug_str:000000000000043f .LASF20
+     /tmp/ccSD5aIK.s:1866   .debug_str:000000000000042f .LASF44
+     /tmp/ccSD5aIK.s:1854   .debug_str:00000000000003d6 .LASF73
+     /tmp/ccSD5aIK.s:1762   .debug_str:0000000000000153 .LASF19
+     /tmp/ccSD5aIK.s:1850   .debug_str:00000000000003c5 .LASF21
+     /tmp/ccSD5aIK.s:1794   .debug_str:0000000000000221 .LASF22
+     /tmp/ccSD5aIK.s:1882   .debug_str:000000000000055b .LASF23
+     /tmp/ccSD5aIK.s:1852   .debug_str:00000000000003d1 .LASF74
+     /tmp/ccSD5aIK.s:1822   .debug_str:00000000000002f5 .LASF24
+     /tmp/ccSD5aIK.s:1768   .debug_str:000000000000016a .LASF26
+     /tmp/ccSD5aIK.s:1800   .debug_str:0000000000000255 .LASF75
+     /tmp/ccSD5aIK.s:1744   .debug_str:00000000000000b1 .LASF76
+     /tmp/ccSD5aIK.s:1732   .debug_str:000000000000005b .LASF25
+     /tmp/ccSD5aIK.s:1788   .debug_str:00000000000001fa .LASF27
+     /tmp/ccSD5aIK.s:1840   .debug_str:0000000000000379 .LASF32
+     /tmp/ccSD5aIK.s:1778   .debug_str:00000000000001b0 .LASF34
+     /tmp/ccSD5aIK.s:1792   .debug_str:000000000000021b .LASF28
+     /tmp/ccSD5aIK.s:1776   .debug_str:00000000000001a0 .LASF29
+     /tmp/ccSD5aIK.s:1738   .debug_str:000000000000008c .LASF30
+     /tmp/ccSD5aIK.s:1782   .debug_str:00000000000001d5 .LASF31
+     /tmp/ccSD5aIK.s:1724   .debug_str:0000000000000021 .LASF33
+     /tmp/ccSD5aIK.s:1798   .debug_str:0000000000000240 .LASF35
+     /tmp/ccSD5aIK.s:1802   .debug_str:000000000000025a .LASF36
+     /tmp/ccSD5aIK.s:1734   .debug_str:000000000000006c .LASF37
+     /tmp/ccSD5aIK.s:1764   .debug_str:0000000000000158 .LASF38
+     /tmp/ccSD5aIK.s:1828   .debug_str:0000000000000310 .LASF39
+     /tmp/ccSD5aIK.s:1886   .debug_str:0000000000000590 .LASF40
+     /tmp/ccSD5aIK.s:1814   .debug_str:00000000000002c5 .LASF77
+     /tmp/ccSD5aIK.s:1784   .debug_str:00000000000001e7 .LASF41
+     /tmp/ccSD5aIK.s:1830   .debug_str:000000000000031d .LASF42
+     /tmp/ccSD5aIK.s:1812   .debug_str:00000000000002b5 .LASF43
+     /tmp/ccSD5aIK.s:1842   .debug_str:0000000000000384 .LASF78
+     /tmp/ccSD5aIK.s:1804   .debug_str:0000000000000267 .LASF45
+     /tmp/ccSD5aIK.s:1826   .debug_str:000000000000030a .LASF46
+     /tmp/ccSD5aIK.s:1862   .debug_str:0000000000000415 .LASF47
+     /tmp/ccSD5aIK.s:1790   .debug_str:0000000000000216 .LASF48
+     /tmp/ccSD5aIK.s:1720   .debug_str:0000000000000009 .LASF49
+     /tmp/ccSD5aIK.s:1872   .debug_str:000000000000050f .LASF50
+     /tmp/ccSD5aIK.s:1806   .debug_str:0000000000000270 .LASF79
+     /tmp/ccSD5aIK.s:1876   .debug_str:0000000000000528 .LASF80
+     /tmp/ccSD5aIK.s:1746   .debug_str:00000000000000c0 .LASF81
+     /tmp/ccSD5aIK.s:1730   .debug_str:000000000000003e .LASF82
+     /tmp/ccSD5aIK.s:1856   .debug_str:00000000000003e3 .LASF83
+     /tmp/ccSD5aIK.s:1750   .debug_str:00000000000000dd .LASF84
+     /tmp/ccSD5aIK.s:1770   .debug_str:000000000000017d .LASF51
+     /tmp/ccSD5aIK.s:1718   .debug_str:0000000000000000 .LASF52
+     /tmp/ccSD5aIK.s:1860   .debug_str:0000000000000408 .LASF53
+     /tmp/ccSD5aIK.s:1796   .debug_str:000000000000022e .LASF54
+     /tmp/ccSD5aIK.s:105    .text:00000000000000a4 .LFB20
+     /tmp/ccSD5aIK.s:184    .text:0000000000000138 .LFE20
+     /tmp/ccSD5aIK.s:1888   .debug_str:000000000000059b .LASF55
+     /tmp/ccSD5aIK.s:1824   .debug_str:00000000000002fe .LASF56
+     /tmp/ccSD5aIK.s:1742   .debug_str:00000000000000a4 .LASF57
+     /tmp/ccSD5aIK.s:129    .text:00000000000000c8 .LBB2
+     /tmp/ccSD5aIK.s:155    .text:0000000000000104 .LBE2
+GAS LISTING /tmp/ccSD5aIK.s 			page 9
+
+
+     /tmp/ccSD5aIK.s:1658   .debug_loc:0000000000000000 .LLST3
+     /tmp/ccSD5aIK.s:145    .text:00000000000000f4 .LVL12
+     /tmp/ccSD5aIK.s:159    .text:000000000000010c .LVL14
+     /tmp/ccSD5aIK.s:1766   .debug_str:0000000000000160 .LASF85
+     /tmp/ccSD5aIK.s:17     .text:0000000000000000 .LFB19
+     /tmp/ccSD5aIK.s:99     .text:00000000000000a4 .LFE19
+     /tmp/ccSD5aIK.s:1670   .debug_loc:0000000000000037 .LLST0
+     /tmp/ccSD5aIK.s:1820   .debug_str:00000000000002ea .LASF58
+     /tmp/ccSD5aIK.s:1684   .debug_loc:0000000000000070 .LLST1
+     /tmp/ccSD5aIK.s:1691   .debug_loc:0000000000000093 .LLST2
+     /tmp/ccSD5aIK.s:52     .text:0000000000000038 .LVL4
+     /tmp/ccSD5aIK.s:59     .text:000000000000004c .LVL5
+     /tmp/ccSD5aIK.s:64     .text:000000000000005c .LVL6
+     /tmp/ccSD5aIK.s:69     .text:0000000000000068 .LVL7
+     /tmp/ccSD5aIK.s:1836   .debug_str:0000000000000345 .LASF59
+     /tmp/ccSD5aIK.s:1756   .debug_str:000000000000011e .LASF61
+     /tmp/ccSD5aIK.s:1772   .debug_str:0000000000000182 .LASF60
+     /tmp/ccSD5aIK.s:1752   .debug_str:00000000000000f8 .LASF62
+     /tmp/ccSD5aIK.s:1884   .debug_str:000000000000057d .LASF63
+     /tmp/ccSD5aIK.s:1846   .debug_str:00000000000003a9 .LASF64
+     /tmp/ccSD5aIK.s:1834   .debug_str:0000000000000336 .LASF65
+     /tmp/ccSD5aIK.s:1774   .debug_str:0000000000000197 .LASF66
+     /tmp/ccSD5aIK.s:1848   .debug_str:00000000000003b5 .LASF67
+     /tmp/ccSD5aIK.s:1728   .debug_str:0000000000000033 .LASF68
+     /tmp/ccSD5aIK.s:128    .text:00000000000000c8 .LVL10
+     /tmp/ccSD5aIK.s:133    .text:00000000000000d0 .LVL11
+     /tmp/ccSD5aIK.s:179    .text:0000000000000130 .LVL15
+     /tmp/ccSD5aIK.s:21     .text:0000000000000000 .LVL0
+     /tmp/ccSD5aIK.s:41     .text:0000000000000020 .LVL2
+     /tmp/ccSD5aIK.s:37     .text:000000000000001c .LVL1
+     /tmp/ccSD5aIK.s:77     .text:0000000000000074 .LVL8
+     /tmp/ccSD5aIK.s:46     .text:0000000000000024 .LVL3
+     /tmp/ccSD5aIK.s:200    .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+_Z11printStringPKc
+_Z8printIntiii
+_Z10time_sleepm
+_Z13thread_createPP3TCBPFvPvES2_
+_Z15thread_dispatchv

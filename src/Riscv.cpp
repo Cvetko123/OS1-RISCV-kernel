@@ -15,14 +15,18 @@ void Riscv::popSppSpie() {
     __asm__ volatile("sret");
 }
 
-// void Riscv::restorePrivilege()
-// {
-//     if(TCB::running->isSysThread())
-//         ms_sstatus(SSTATUS_SPP);
-//     else
-//         mc_sstatus(SSTATUS_SPP);
-// }
 
+BBuff* Riscv::INbuff = nullptr;
+BBuff* Riscv::OUTbuff = nullptr;
+
+void Riscv::InitBBuffs() {
+    if (INbuff==nullptr) {
+        INbuff=new BBuff(256);
+    }
+    if (OUTbuff==nullptr) {
+        OUTbuff=new BBuff(256);
+    }
+}
 
 void Riscv::SupervisorTrapHandler() {
     uint64 sepc;
@@ -32,6 +36,7 @@ void Riscv::SupervisorTrapHandler() {
     sstatus=get_sstatus();
     if (scause == 0x8000000000000001UL) {
         // interrupt from timer
+
         TCB::timeCounter++;
         SList::oneTick();
         if (TCB::timeCounter >= TCB::running->getTimeSlice()) {
@@ -43,7 +48,23 @@ void Riscv::SupervisorTrapHandler() {
     }
     else if (scause == 0x8000000000000009UL) {
         // interrupt from keyboard
-        console_handler();
+
+        int irq = plic_claim();
+        if(irq==0x0a)
+        {
+            volatile char status = (*(char*)CONSOLE_STATUS);
+            while(status & CONSOLE_RX_STATUS_BIT)
+            {
+                volatile  char c = (*(char*)CONSOLE_RX_DATA);
+                INbuff->put(c);
+                status = (*(char*)CONSOLE_STATUS);
+            }
+
+        }
+        plic_complete(irq);
+        set_sepc(sepc);
+        set_sstatus(sstatus);
+        //console_handler();
     }
     else {
         uint64 syscode;
@@ -137,8 +158,17 @@ void Riscv::SupervisorTrapHandler() {
         int ret=TCB::sleep(sleepTime);
         __asm__ volatile ("mv a0, %[x]" :: [x] "r" (ret));
     }
+    else if (syscode==GETCHAR) {
+        char c = INbuff->get();
+        __asm__ volatile ("mv a0, %[x]" :: [x] "r" (c));
+    }
+    else if (syscode==PUTCHAR) {
+        char c;
+        __asm__ volatile ("mv %[x], a1" : [x] "=r" (c));
+        OUTbuff->put(c);
+    }
     else {
-        uint64 scause= get_scause();
+        scause= get_scause();
         uint64 stval= get_stval();
         pprintString("scause:");
         printInteger(scause);
@@ -151,7 +181,7 @@ void Riscv::SupervisorTrapHandler() {
         pprintString("sepc:");
         printInteger(sepc);
         pprintString("\n");
-        __getc();
+        getc();
     }
     set_sepc(sepc+4);
     set_sstatus(sstatus);

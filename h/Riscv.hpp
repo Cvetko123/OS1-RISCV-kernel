@@ -5,7 +5,7 @@
 #ifndef PROJECT_BASE_V1_1_COPY_RISCV_HPP
 #define PROJECT_BASE_V1_1_COPY_RISCV_HPP
 #include "../lib/hw.h"
-
+#include "BBuff.hpp"
 class Riscv {
 public:
     static void set_stvec(uint64 stvec);
@@ -19,6 +19,8 @@ public:
     static void mc_sstatus(uint64 mask);
     static void mc_sip(uint64 mask);
     static void ms_sie(uint64 mask);
+
+    static void InitBBuffs();
     enum BitMaskSstatus
     {
         SSTATUS_SIE=(1UL<<1),
@@ -39,14 +41,11 @@ public:
 
 
     static void SupervisorTrap();
-
-    static void restorePrivilege();
     static void popSppSpie();
-
-
-
     static void SupervisorTrapHandler();
 
+    static BBuff* INbuff;
+    static BBuff* OUTbuff;
 
 };
 

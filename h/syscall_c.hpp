@@ -18,6 +18,9 @@ enum syscallCodes {
     SEM_WAIT=0x23,
     SEM_SIGNAL=0x24,
     TIME_SLEEP=0x31,
+    GETCHAR=0x41,
+    PUTCHAR=0x42,
+
 };
 
 
@@ -52,5 +55,10 @@ int sem_signal(sem_t id);
 int time_sleep(time_t time);
 
 
+const int EOF=-1;
+
+char getc();
+
+void putc(char c);
 
 #endif //PROJECT_BASE_V1_1_COPY_SYSCALL_C_HPP

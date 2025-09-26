@@ -82,3 +82,11 @@ void PeriodicThread::run() {
             sleep(period);
     }
 }
+
+char Console::getc() {
+    return ::getc();
+}
+
+void Console::putc(char c) {
+    ::putc(c);
+}

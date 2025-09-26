@@ -9,15 +9,15 @@ BufferCPP::BufferCPP(int _cap) : cap(_cap + 1), head(0), tail(0) {
 }
 
 BufferCPP::~BufferCPP() {
-    __putc('\n');
+    putc('\n');
     printString("Buffer deleted!\n");
     while (getCnt()) {
         char ch = buffer[head];
-        __putc(ch);
+        putc(ch);
         head = (head + 1) % cap;
     }
-    __putc('!');
-    __putc('\n');
+    putc('!');
+    putc('\n');
 
     mem_free(buffer);
     delete itemAvailable;

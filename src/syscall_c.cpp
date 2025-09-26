@@ -123,3 +123,15 @@ int time_sleep(time_t time)
     __asm__ volatile ("mv %[x], a0" : [x] "=r" (ret));
     return (int)ret;
 }
+
+char getc() {
+    invoke(GETCHAR);
+    uint64 ret;
+    __asm__ volatile ("mv %[x], a0" : [x] "=r" (ret));
+    return (char)ret;
+}
+
+void putc(char c) {
+    __asm__ volatile ("mv a1, %[x]" :: [x] "r" (c));
+    invoke(PUTCHAR);
+}

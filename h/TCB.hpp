@@ -33,18 +33,20 @@ public:
 
     static void dispatch();
     static int exit();
+    static void InitOutputThread();
 
 
     bool isFinished() const { return finished;}
-
     void block() { this->blocked = true; }
     void unblock() { this->blocked = false; }
     bool isBlocked() const { return blocked; }
-
     time_t getTimeSlice() const { return timeSlice; }
 
 
     static TCB* running;
+    static TCB* outputThread;
+    static TCB* idleThread;
+    bool idle;
 
     static time_t timeCounter;
 
@@ -71,6 +73,7 @@ private:
             blocked(false),
     timeSlice(DEFAULT_TIME_SLICE)
     {
+        idle=false;
         timeSlice = DEFAULT_TIME_SLICE;
         if (running == nullptr) {
             running = this;
@@ -86,7 +89,11 @@ private:
     bool blocked;
     time_t timeSlice;
 
+
+
     static void TCBWrapper();
+    static void OutputThreadBody( void* arg );
+    static void IdleThreadBody( void* arg );
 
 };
 #endif //PROJECT_BASE_V1_1_COPY_TCB_HPP

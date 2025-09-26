@@ -8,6 +8,8 @@
 extern "C" void context_switch(TCB::Context* oldContext, TCB::Context* newContext);
 
 TCB* TCB::running=nullptr;
+TCB* TCB::outputThread=nullptr;
+TCB* TCB::idleThread=nullptr;
 time_t TCB::timeCounter=0;
 
 TCB* TCB::createThread(Body body, void *arg, uint64 *stack) {
@@ -17,14 +19,16 @@ TCB* TCB::createThread(Body body, void *arg, uint64 *stack) {
 void TCB::dispatch() {
     //pprintString("TCB::dispatch()\n");
     TCB *old=running;
-    if (!old->isFinished() && !old->isBlocked()) {
+    if (!old->isFinished() && !old->isBlocked() && !old->idle) {
         Scheduler::put(old);
     }
     running=Scheduler::get();
+    if (!running) {
+        running=idleThread;
+    }
 
 
     timeCounter=0;
-    //Riscv::restorePrivilege();
     context_switch(&old->context, &running->context);
 }
 
@@ -40,11 +44,9 @@ int TCB::exit() {
 }
 
 void TCB::TCBWrapper() {
-    //pprintString("Entered wrapper\n");
-    //Riscv::restorePrivilege();
     Riscv::popSppSpie();
     running->body(running->arg);
-    exit();
+    TCB::exit();
 }
 
 int TCB::sleep(time_t time) {
@@ -55,4 +57,40 @@ int TCB::sleep(time_t time) {
     SList::add(running, time);
     dispatch();
     return 0;
+}
+
+void TCB::OutputThreadBody(void *arg) {
+    while(true)
+    {
+        volatile char status = *((char*)CONSOLE_STATUS);
+        while(status & CONSOLE_TX_STATUS_BIT)
+        {
+            char c = Riscv::OUTbuff->get();
+            *((char*)CONSOLE_TX_DATA) = c;
+            status = *((char*)CONSOLE_STATUS);
+        }
+    }
+}
+
+
+
+void TCB::IdleThreadBody(void *arg) {
+    while(1) {  }
+}
+
+
+
+
+
+void TCB::InitOutputThread() {
+
+
+        outputThread = new TCB(OutputThreadBody,nullptr, (uint64*)MemoryAllocator::Instance()->mem_alloc(DEFAULT_STACK_SIZE));
+        Scheduler::put(outputThread);
+
+
+
+        idleThread=new TCB(IdleThreadBody,nullptr, (uint64*)MemoryAllocator::Instance()->mem_alloc(DEFAULT_STACK_SIZE));
+        idleThread->idle=true;
+
 }

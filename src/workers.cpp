@@ -20,7 +20,7 @@ void initSemaphore() {
     if (semaphore) {
         return;
     }
-    semaphore = new Semaphore(2);
+    semaphore = new Semaphore(1);
     if (semaphore == nullptr) {
         pprintString("Failed\n");
 
@@ -60,7 +60,7 @@ void workerBodyA() {
 
 void workerBodyB() {
     initSemaphore();
-    //semaphore->wait();
+    semaphore->wait();
     // uint8 i = 10;
     // for (; i < 13; i++) { pprintString("B: i="); printInteger(i); pprintString("\n"); }
 
@@ -81,13 +81,13 @@ void workerBodyB() {
         }
     }
     pprintString("B finished!\n");
-    //semaphore->signal();
+    semaphore->signal();
 }
 
 void workerBodyC() {
     initSemaphore();
-    //semaphore->wait();
-    time_sleep(80);
+    semaphore->wait();
+    time_sleep(8);
     for (uint64 i = 0; i < 5; i++) {
         pprintString("C: i="); printInteger(i); pprintString("\n");
         for (uint64 j = 0; j < 10000; j++) {
@@ -114,14 +114,18 @@ void workerBodyC() {
     //
     // for (; i < 26; i++) { pprintString("C: i="); printInteger(i); pprintString("\n"); }
     // pprintString("C finished!\n");
-    //semaphore->signal();
+    semaphore->signal();
 }
 
 
 
 
 void WorkerP::workerBodyP(void* arg) {
-
-    pprintString("Mrzim boga\n");
+    static int da=0;
+    pprintString("Tu sam\n");
+    da++;
+    if (da==4) {
+        terminate();
+    }
 
 }
