@@ -34,8 +34,7 @@
 
 void userMain() {
     pprintString("Unesite broj testa? [1-7]\n");
-    int test = 4
-    ;
+    int test = 3;
 
 
     if ((test >= 1 && test <= 2) || test == 7) {

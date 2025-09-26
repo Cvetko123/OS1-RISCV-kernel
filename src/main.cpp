@@ -6,7 +6,7 @@
 #include  "../h/syscall_cpp.hpp"
 #include "../h/Riscv.hpp"
 #include "../h/print.hpp"
-#include "../h/List.hpp"
+#include "../h/SList.hpp"
 #include  "../h/TCB.hpp"
 #include "../h/workers.hpp"
 
@@ -75,23 +75,29 @@ void WorkerCWrapper(void* arg)
 
 
 
+void exit_emulator() {
+    uint64 *stop_adr = (uint64*)0x100000;
+    uint64 stop_val = 0x5555;
 
+    asm volatile ("sw %0, 0(%1)":: "r" (stop_val), "r" (stop_adr));
+}
 
 void main() {
-    Riscv::set_stvec((uint64)&Riscv::SupervisorTrap);
-    Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
-
-
+     Riscv::set_stvec((uint64)&Riscv::SupervisorTrap);
+     Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
 
 
      thread_t coroutines[4];
      thread_create(&coroutines[0],nullptr,nullptr);
+     // PeriodicThread* periodican= new WorkerP(5);
+     // periodican->start();
      thread_create(&coroutines[1],WorkerAWrapper,nullptr);
      thread_create(&coroutines[2],WorkerBWrapper,nullptr);
      thread_create(&coroutines[3],WorkerCWrapper,nullptr);
 
 
-     while (Scheduler::getSize()>0 ) {
+
+     while (Scheduler::getSize()>0 || SList::getSize()>0 ) {
          thread_dispatch();
      }
 
@@ -100,6 +106,7 @@ void main() {
      AllocatorTest();
      pprintString("Finished\n");
 
+    exit_emulator();
 
     // size_t pom1= mem_get_free_space();
     // pprintString("Free mem: ");

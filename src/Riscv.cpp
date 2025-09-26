@@ -7,6 +7,7 @@
 #include "../h/syscall_c.hpp"
 #include "../h/MemoryAllocator.hpp"
 #include  "../h/print.hpp"
+#include "../h/SList.hpp"
 using Body=void(*)(void*);
 
 void Riscv::popSppSpie() {
@@ -32,6 +33,7 @@ void Riscv::SupervisorTrapHandler() {
     if (scause == 0x8000000000000001UL) {
         // interrupt from timer
         TCB::timeCounter++;
+        SList::oneTick();
         if (TCB::timeCounter >= TCB::running->getTimeSlice()) {
             TCB::dispatch();
             set_sepc(sepc);
@@ -127,6 +129,12 @@ void Riscv::SupervisorTrapHandler() {
         sem_t handle;
         __asm__ volatile ("mv %[x], a1" : [x] "=r" (handle));
         int ret=handle->signal();
+        __asm__ volatile ("mv a0, %[x]" :: [x] "r" (ret));
+    }
+    else if (syscode==TIME_SLEEP) {
+        time_t sleepTime;
+        __asm__ volatile ("mv %[x], a1" : [x] "=r" (sleepTime));
+        int ret=TCB::sleep(sleepTime);
         __asm__ volatile ("mv a0, %[x]" :: [x] "r" (ret));
     }
     else {

@@ -114,3 +114,12 @@ int sem_signal(sem_t id)
     __asm__ volatile ("mv %[x], a0" : [x] "=r" (ret));
     return (int)ret;
 }
+
+int time_sleep(time_t time)
+{
+    __asm__ volatile ("mv a1, %[x]" :: [x] "r" (time));
+    invoke(TIME_SLEEP);
+    uint64 ret;
+    __asm__ volatile ("mv %[x], a0" : [x] "=r" (ret));
+    return (int)ret;
+}

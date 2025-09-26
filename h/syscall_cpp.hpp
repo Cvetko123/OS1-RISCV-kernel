@@ -22,7 +22,7 @@ public:
     virtual ~Thread ();
     int start ();
     static void dispatch ();
-    //static int sleep (time_t);
+    static int sleep (time_t);
 protected:
     Thread ();
     virtual void run () {}
@@ -40,6 +40,17 @@ public:
     int signal ();
 private:
     sem_t myHandle;
+};
+
+class PeriodicThread : public Thread {
+public:
+    void terminate ();
+protected:
+    PeriodicThread (time_t period);
+    virtual void periodicActivation () {}
+private:
+    void run() override;
+    time_t period;
 };
 
 

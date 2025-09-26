@@ -34,6 +34,7 @@ public:
     static void dispatch();
     static int exit();
 
+
     bool isFinished() const { return finished;}
 
     void block() { this->blocked = true; }
@@ -52,20 +53,25 @@ public:
         uint64 ra;
         uint64 sp;
     };
+protected:
+    static int sleep(time_t time);
+
+    friend class Riscv;
 
 private:
     TCB(Body body, void* arg, uint64* stackMem)
         : finished(false),
           stack(stackMem),
-          arg(arg),   // now in correct order
+          arg(arg),
           context({
               body != nullptr ? (uint64)&TCBWrapper : 0,
               body != nullptr ? (uint64)((char*)stackMem + DEFAULT_STACK_SIZE) : 0
           }),
-          body(body)
+          body(body),
+            blocked(false),
+    timeSlice(DEFAULT_TIME_SLICE)
     {
-        this->blocked = false;
-        this->timeSlice= DEFAULT_TIME_SLICE;
+        timeSlice = DEFAULT_TIME_SLICE;
         if (running == nullptr) {
             running = this;
         } else {
@@ -75,13 +81,10 @@ private:
     bool finished;
     uint64* stack;
     void* arg;
-    bool blocked;
-    time_t timeSlice;
-
-
-
     Context context;
     Body body;
+    bool blocked;
+    time_t timeSlice;
 
     static void TCBWrapper();
 

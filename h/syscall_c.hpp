@@ -17,6 +17,7 @@ enum syscallCodes {
     SEM_CLOSE=0x22,
     SEM_WAIT=0x23,
     SEM_SIGNAL=0x24,
+    TIME_SLEEP=0x31,
 };
 
 
@@ -46,6 +47,9 @@ int sem_close(sem_t handle);
 int sem_wait(sem_t id);
 
 int sem_signal(sem_t id);
+
+
+int time_sleep(time_t time);
 
 
 

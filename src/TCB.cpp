@@ -3,6 +3,7 @@
 #include  "../h/print.hpp"
 #include "../h/syscall_c.hpp"
 #include "../h/Riscv.hpp"
+#include "../h/SList.hpp"
 
 extern "C" void context_switch(TCB::Context* oldContext, TCB::Context* newContext);
 
@@ -44,4 +45,14 @@ void TCB::TCBWrapper() {
     Riscv::popSppSpie();
     running->body(running->arg);
     exit();
+}
+
+int TCB::sleep(time_t time) {
+    if (time <= 0) {
+        return -1;
+    }
+    running->block();
+    SList::add(running, time);
+    dispatch();
+    return 0;
 }

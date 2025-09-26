@@ -48,6 +48,10 @@ void Thread::wrapper(void* ptr)
     ((Thread*)ptr)->run();
 }
 
+int Thread::sleep(time_t time) {
+    return time_sleep(time);
+}
+
 Semaphore::Semaphore(unsigned init) {
 
     sem_open(&myHandle, init);
@@ -62,4 +66,19 @@ int Semaphore::wait() {
 
 int Semaphore::signal() {
     return sem_signal(myHandle);
+}
+
+PeriodicThread::PeriodicThread(time_t period):Thread() {
+    this->period=period;
+}
+void PeriodicThread::terminate() {
+    this->period=0;
+}
+
+void PeriodicThread::run() {
+    while (period!=0) {
+        periodicActivation();
+        if (period!=0)
+            sleep(period);
+    }
 }

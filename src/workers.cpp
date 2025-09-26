@@ -29,7 +29,7 @@ void initSemaphore() {
 
 void workerBodyA() {
    initSemaphore();
-   semaphore->wait();
+   //semaphore->wait();
     // uint8 i = 0;
     // for (; i < 3; i++) { pprintString("A: i="); printInteger(i); pprintString("\n"); }
 
@@ -45,6 +45,7 @@ void workerBodyA() {
     // pprintString("A: fibonaci="); printInteger(result); pprintString("\n");
 
     //for (; i < 6; i++) { pprintString("A: i="); printInteger(i); pprintString("\n"); }
+    time_sleep(40);
     for (uint64 i = 0; i < 10; i++) {
         pprintString("A: i="); printInteger(i); pprintString("\n");
         for (uint64 j = 0; j < 10000; j++) {
@@ -53,13 +54,13 @@ void workerBodyA() {
         }
     }
     pprintString("A finished!\n");
-    semaphore->signal();
+    //semaphore->signal();
 
 }
 
 void workerBodyB() {
     initSemaphore();
-    semaphore->wait();
+    //semaphore->wait();
     // uint8 i = 10;
     // for (; i < 13; i++) { pprintString("B: i="); printInteger(i); pprintString("\n"); }
 
@@ -71,7 +72,7 @@ void workerBodyB() {
     // pprintString("B: fibonaci="); printInteger(result); pprintString("\n");
 
     //for (; i < 16; i++) { pprintString("B: i="); printInteger(i); pprintString("\n"); }
-
+    time_sleep(10);
     for (uint64 i = 0; i < 16; i++) {
         pprintString("B: i="); printInteger(i); pprintString("\n");
         for (uint64 j = 0; j < 10000; j++) {
@@ -80,24 +81,47 @@ void workerBodyB() {
         }
     }
     pprintString("B finished!\n");
-    semaphore->signal();
+    //semaphore->signal();
 }
 
 void workerBodyC() {
     initSemaphore();
-    semaphore->wait();
-    uint8 i = 20;
-    for (; i < 100; i++) { pprintString("C: i="); printInteger(i); pprintString("\n"); }
-
-    pprintString("C: yield\n");
-    __asm__ ("li t1, 9");
-    thread_dispatch();
-
-    uint64 result = fibonacci(35);
-    pprintString("C: fibonaci="); printInteger(result); pprintString("\n");
-
-    for (; i < 26; i++) { pprintString("C: i="); printInteger(i); pprintString("\n"); }
+    //semaphore->wait();
+    time_sleep(80);
+    for (uint64 i = 0; i < 5; i++) {
+        pprintString("C: i="); printInteger(i); pprintString("\n");
+        for (uint64 j = 0; j < 10000; j++) {
+            for (uint64 k = 0; k < 30000; k++) { /* busy wait */ }
+            // TCB::yield();
+        }
+    }
     pprintString("C finished!\n");
-    semaphore->signal();
+    // uint8 i = 20;
+    // for (; i < 28; i++) {
+    //     pprintString("C: i="); printInteger(i); pprintString("\n");
+    //     for (uint64 j = 0; j < 10000; j++) {
+    //         for (uint64 k = 0; k < 30000; k++) { /* busy wait */ }
+    //         // TCB::yield();
+    //     }
+    // }
+    //
+    // pprintString("C: yield\n");
+    // __asm__ ("li t1, 9");
+    // thread_dispatch();
+    //
+    // uint64 result = fibonacci(35);
+    // pprintString("C: fibonaci="); printInteger(result); pprintString("\n");
+    //
+    // for (; i < 26; i++) { pprintString("C: i="); printInteger(i); pprintString("\n"); }
+    // pprintString("C finished!\n");
+    //semaphore->signal();
 }
 
+
+
+
+void WorkerP::workerBodyP(void* arg) {
+
+    pprintString("Mrzim boga\n");
+
+}
