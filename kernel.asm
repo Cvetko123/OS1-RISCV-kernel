@@ -1476,12 +1476,12 @@ void exit_emulator() {
 0000000080001dc8 <main>:
 
 void main() {
-    80001dc8:	fc010113          	addi	sp,sp,-64
-    80001dcc:	02113c23          	sd	ra,56(sp)
-    80001dd0:	02813823          	sd	s0,48(sp)
-    80001dd4:	02913423          	sd	s1,40(sp)
-    80001dd8:	03213023          	sd	s2,32(sp)
-    80001ddc:	04010413          	addi	s0,sp,64
+    80001dc8:	fb010113          	addi	sp,sp,-80
+    80001dcc:	04113423          	sd	ra,72(sp)
+    80001dd0:	04813023          	sd	s0,64(sp)
+    80001dd4:	02913c23          	sd	s1,56(sp)
+    80001dd8:	03213823          	sd	s2,48(sp)
+    80001ddc:	05010413          	addi	s0,sp,80
     Riscv::set_stvec((uint64)&Riscv::SupervisorTrap);
     80001de0:	0000a797          	auipc	a5,0xa
     80001de4:	c087b783          	ld	a5,-1016(a5) # 8000b9e8 <_GLOBAL_OFFSET_TABLE_+0x20>
@@ -1504,26 +1504,28 @@ inline void Riscv::ms_sstatus(uint64 mask) {
     Riscv::InitBBuffs();
     80001df4:	00001097          	auipc	ra,0x1
     80001df8:	ab0080e7          	jalr	-1360(ra) # 800028a4 <_ZN5Riscv10InitBBuffsEv>
-    thread_t coroutines[4];
-    thread_create(&coroutines[0],nullptr,nullptr);
+    thread_t kernelThread;
+    thread_create(&kernelThread,nullptr,nullptr);
     80001dfc:	00000613          	li	a2,0
     80001e00:	00000593          	li	a1,0
-    80001e04:	fc040513          	addi	a0,s0,-64
+    80001e04:	fd840513          	addi	a0,s0,-40
     80001e08:	fffff097          	auipc	ra,0xfffff
     80001e0c:	418080e7          	jalr	1048(ra) # 80001220 <_Z13thread_createPP3TCBPFvPvES2_>
+    // thread_t coroutines[4];
+    // thread_create(&coroutines[0],nullptr,nullptr);
     TCB::InitOutputThread();
     80001e10:	00001097          	auipc	ra,0x1
     80001e14:	8a8080e7          	jalr	-1880(ra) # 800026b8 <_ZN3TCB16InitOutputThreadEv>
 
 
-
+    thread_t coroutines[4];
     // PeriodicThread* periodican= new WorkerP(5);
     // periodican->start();
     thread_create(&coroutines[1],userWrapper,nullptr);
     80001e18:	00000613          	li	a2,0
     80001e1c:	00000597          	auipc	a1,0x0
     80001e20:	ec458593          	addi	a1,a1,-316 # 80001ce0 <_Z11userWrapperPv>
-    80001e24:	fc840513          	addi	a0,s0,-56
+    80001e24:	fc040513          	addi	a0,s0,-64
     80001e28:	fffff097          	auipc	ra,0xfffff
     80001e2c:	3f8080e7          	jalr	1016(ra) # 80001220 <_Z13thread_createPP3TCBPFvPvES2_>
     80001e30:	00c0006f          	j	80001e3c <main+0x74>
@@ -1536,7 +1538,7 @@ inline void Riscv::ms_sstatus(uint64 mask) {
     80001e34:	fffff097          	auipc	ra,0xfffff
     80001e38:	450080e7          	jalr	1104(ra) # 80001284 <_Z15thread_dispatchv>
     while (!coroutines[1]->isFinished()  || Riscv::OUTbuff->getCnt()>0 ) {
-    80001e3c:	fc843783          	ld	a5,-56(s0)
+    80001e3c:	fc043783          	ld	a5,-64(s0)
     bool isFinished() const { return finished;}
     80001e40:	0017c783          	lbu	a5,1(a5)
     80001e44:	fe0788e3          	beqz	a5,80001e34 <main+0x6c>
@@ -1551,7 +1553,7 @@ inline void Riscv::ms_sstatus(uint64 mask) {
         return count;
     80001e54:	0287a783          	lw	a5,40(a5)
     80001e58:	fcf04ee3          	bgtz	a5,80001e34 <main+0x6c>
-    80001e5c:	fc040493          	addi	s1,s0,-64
+    80001e5c:	fb840493          	addi	s1,s0,-72
     80001e60:	01c0006f          	j	80001e7c <main+0xb4>
         return MemoryAllocator::Instance()->mem_free(ptr);
     80001e64:	00001097          	auipc	ra,0x1
@@ -1564,7 +1566,7 @@ inline void Riscv::ms_sstatus(uint64 mask) {
 
     for (auto coroutine: coroutines) { delete coroutine; }
     80001e78:	00848493          	addi	s1,s1,8
-    80001e7c:	fe040793          	addi	a5,s0,-32
+    80001e7c:	fd840793          	addi	a5,s0,-40
     80001e80:	02f48063          	beq	s1,a5,80001ea0 <main+0xd8>
     80001e84:	0004b903          	ld	s2,0(s1)
     80001e88:	fe0908e3          	beqz	s2,80001e78 <main+0xb0>
@@ -1587,11 +1589,11 @@ inline void Riscv::ms_sstatus(uint64 mask) {
 
 
 }
-    80001eb8:	03813083          	ld	ra,56(sp)
-    80001ebc:	03013403          	ld	s0,48(sp)
-    80001ec0:	02813483          	ld	s1,40(sp)
-    80001ec4:	02013903          	ld	s2,32(sp)
-    80001ec8:	04010113          	addi	sp,sp,64
+    80001eb8:	04813083          	ld	ra,72(sp)
+    80001ebc:	04013403          	ld	s0,64(sp)
+    80001ec0:	03813483          	ld	s1,56(sp)
+    80001ec4:	03013903          	ld	s2,48(sp)
+    80001ec8:	05010113          	addi	sp,sp,80
     80001ecc:	00008067          	ret
 
 0000000080001ed0 <_ZN6Thread7wrapperEPv>:

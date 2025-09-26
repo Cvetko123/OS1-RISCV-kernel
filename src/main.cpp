@@ -66,12 +66,14 @@ void main() {
     Riscv::set_stvec((uint64)&Riscv::SupervisorTrap);
     Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
     Riscv::InitBBuffs();
-    thread_t coroutines[4];
-    thread_create(&coroutines[0],nullptr,nullptr);
+    thread_t kernelThread;
+    thread_create(&kernelThread,nullptr,nullptr);
+    // thread_t coroutines[4];
+    // thread_create(&coroutines[0],nullptr,nullptr);
     TCB::InitOutputThread();
 
 
-
+    thread_t coroutines[4];
     // PeriodicThread* periodican= new WorkerP(5);
     // periodican->start();
     thread_create(&coroutines[1],userWrapper,nullptr);
