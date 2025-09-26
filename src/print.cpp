@@ -9,7 +9,7 @@
 void pprintString(const char *string) {
 
     while (*string!='\0') {
-        __putc(*string);
+        putc(*string);
         string++;
     }
 
@@ -38,7 +38,7 @@ void printInteger(uint64 integer) {
     }
 
     while (--i>=0) {
-        __putc(buf[i]);
+        putc(buf[i]);
     }
 
 }
