@@ -43,6 +43,8 @@ public:
     static void SupervisorTrap();
     static void popSppSpie();
     static void SupervisorTrapHandler();
+    static void restoreSPP();
+
 
     static BBuff* INbuff;
     static BBuff* OUTbuff;

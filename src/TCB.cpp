@@ -26,9 +26,8 @@ void TCB::dispatch() {
     if (!running) {
         running=idleThread;
     }
-
-
     timeCounter=0;
+    Riscv::restoreSPP();
     context_switch(&old->context, &running->context);
 }
 
@@ -44,9 +43,10 @@ int TCB::exit() {
 }
 
 void TCB::TCBWrapper() {
+    Riscv::restoreSPP();
     Riscv::popSppSpie();
     running->body(running->arg);
-    TCB::exit();
+    exit();
 }
 
 int TCB::sleep(time_t time) {
@@ -84,13 +84,11 @@ void TCB::IdleThreadBody(void *arg) {
 
 void TCB::InitOutputThread() {
 
+    outputThread = new TCB(OutputThreadBody,nullptr, (uint64*)MemoryAllocator::Instance()->mem_alloc(DEFAULT_STACK_SIZE));
+    outputThread->sys=true;
+    Scheduler::put(outputThread);
 
-        outputThread = new TCB(OutputThreadBody,nullptr, (uint64*)MemoryAllocator::Instance()->mem_alloc(DEFAULT_STACK_SIZE));
-        Scheduler::put(outputThread);
-
-
-
-        idleThread=new TCB(IdleThreadBody,nullptr, (uint64*)MemoryAllocator::Instance()->mem_alloc(DEFAULT_STACK_SIZE));
-        idleThread->idle=true;
-
+    idleThread=new TCB(IdleThreadBody,nullptr, (uint64*)MemoryAllocator::Instance()->mem_alloc(DEFAULT_STACK_SIZE));
+    idleThread->sys=true;
+    idleThread->idle=true;
 }

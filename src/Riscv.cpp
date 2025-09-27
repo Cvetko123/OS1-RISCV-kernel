@@ -15,6 +15,14 @@ void Riscv::popSppSpie() {
     __asm__ volatile("sret");
 }
 
+void Riscv::restoreSPP() {
+
+    if(TCB::running->sys)
+        ms_sstatus(SSTATUS_SPP);
+    else
+        mc_sstatus(SSTATUS_SPP);
+}
+
 
 BBuff* Riscv::INbuff = nullptr;
 BBuff* Riscv::OUTbuff = nullptr;
@@ -181,7 +189,7 @@ void Riscv::SupervisorTrapHandler() {
         pprintString("sepc:");
         printInteger(sepc);
         pprintString("\n");
-        getc();
+        //getc();
     }
     set_sepc(sepc+4);
     set_sstatus(sstatus);

@@ -47,6 +47,7 @@ public:
     static TCB* outputThread;
     static TCB* idleThread;
     bool idle;
+    bool sys;
 
     static time_t timeCounter;
 
@@ -74,6 +75,7 @@ private:
     timeSlice(DEFAULT_TIME_SLICE)
     {
         idle=false;
+        sys=false;
         timeSlice = DEFAULT_TIME_SLICE;
         if (running == nullptr) {
             running = this;

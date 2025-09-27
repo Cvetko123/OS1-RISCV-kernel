@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccfsRVCr.s 			page 1
+GAS LISTING /tmp/cckuQMXD.s 			page 1
 
 
    1              		.file	"userMain.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccfsRVCr.s 			page 1
   27      7A616461 
   27      74616B20 
   27      342E2043 
-GAS LISTING /tmp/ccfsRVCr.s 			page 2
+GAS LISTING /tmp/cckuQMXD.s 			page 2
 
 
   28 01b3 00000000 		.align	3
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccfsRVCr.s 			page 1
   27:Test/userMain.cpp **** #endif
   28:Test/userMain.cpp **** 
   29:Test/userMain.cpp **** #if LEVEL_4_IMPLEMENTED == 1
-GAS LISTING /tmp/ccfsRVCr.s 			page 3
+GAS LISTING /tmp/cckuQMXD.s 			page 3
 
 
   30:Test/userMain.cpp **** // TEST 5 (zadatak 4., thread_sleep test C API)
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccfsRVCr.s 			page 1
   51:Test/userMain.cpp **** 
   52:Test/userMain.cpp ****     if (test >= 3 && test <= 4) {
   73              		.loc 1 52 5
-GAS LISTING /tmp/ccfsRVCr.s 			page 4
+GAS LISTING /tmp/cckuQMXD.s 			page 4
 
 
   53:Test/userMain.cpp ****         if (LEVEL_3_IMPLEMENTED == 0) {
@@ -238,7 +238,7 @@ GAS LISTING /tmp/ccfsRVCr.s 			page 1
  106      E7800000 
  107              	.LVL5:
   71:Test/userMain.cpp **** #endif
-GAS LISTING /tmp/ccfsRVCr.s 			page 5
+GAS LISTING /tmp/cckuQMXD.s 			page 5
 
 
   72:Test/userMain.cpp ****             break;
@@ -298,7 +298,7 @@ GAS LISTING /tmp/ccfsRVCr.s 			page 1
  120              		.cfi_def_cfa_offset 0
  121 0084 67800000 		jr	ra
  122              	.L9:
-GAS LISTING /tmp/ccfsRVCr.s 			page 6
+GAS LISTING /tmp/cckuQMXD.s 			page 6
 
 
  123              		.cfi_restore_state
@@ -358,7 +358,7 @@ GAS LISTING /tmp/ccfsRVCr.s 			page 1
   88:Test/userMain.cpp ****             pprintString("TEST 4 (zadatak 3., kompletan CPP API sa semaforima, sinhrona promena kon
  155              		.loc 1 88 13 is_stmt 1
   88:Test/userMain.cpp ****             pprintString("TEST 4 (zadatak 3., kompletan CPP API sa semaforima, sinhrona promena kon
-GAS LISTING /tmp/ccfsRVCr.s 			page 7
+GAS LISTING /tmp/cckuQMXD.s 			page 7
 
 
  156              		.loc 1 88 25 is_stmt 0
@@ -418,7 +418,7 @@ GAS LISTING /tmp/ccfsRVCr.s 			page 1
  103:Test/userMain.cpp ****         case 7:
  189              		.loc 1 103 9
  105:Test/userMain.cpp ****             System_Mode_test();
-GAS LISTING /tmp/ccfsRVCr.s 			page 8
+GAS LISTING /tmp/cckuQMXD.s 			page 8
 
 
  190              		.loc 1 105 13
@@ -474,197 +474,197 @@ GAS LISTING /tmp/ccfsRVCr.s 			page 1
  225              		.file 9 "Test/ThreadSleep_C_API_test.hpp"
  226              		.file 10 "Test/ConsumerProducer_CPP_API_test.hpp"
  227              		.file 11 "Test/System_Mode_test.hpp"
-GAS LISTING /tmp/ccfsRVCr.s 			page 9
+GAS LISTING /tmp/cckuQMXD.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 userMain.cpp
-     /tmp/ccfsRVCr.s:41     .text:0000000000000000 _Z8userMainv
-     /tmp/ccfsRVCr.s:45     .text:0000000000000000 .L0 
-     /tmp/ccfsRVCr.s:46     .text:0000000000000000 .L0 
-     /tmp/ccfsRVCr.s:47     .text:0000000000000004 .L0 
-     /tmp/ccfsRVCr.s:51     .text:0000000000000010 .L0 
-     /tmp/ccfsRVCr.s:52     .text:0000000000000010 .L0 
-     /tmp/ccfsRVCr.s:53     .text:0000000000000010 .L0 
-     /tmp/ccfsRVCr.s:55     .text:0000000000000014 .L0 
-     /tmp/ccfsRVCr.s:57     .text:0000000000000014 .L0 
-     /tmp/ccfsRVCr.s:58     .text:0000000000000014 .L0 
-     /tmp/ccfsRVCr.s:62     .text:0000000000000024 .L0 
-     /tmp/ccfsRVCr.s:63     .text:0000000000000024 .L0 
-     /tmp/ccfsRVCr.s:66     .text:000000000000002c .L0 
-     /tmp/ccfsRVCr.s:69     .text:0000000000000030 .L0 
-     /tmp/ccfsRVCr.s:70     .text:0000000000000030 .L0 
-     /tmp/ccfsRVCr.s:73     .text:0000000000000038 .L0 
-     /tmp/ccfsRVCr.s:74     .text:0000000000000038 .L0 
-     /tmp/ccfsRVCr.s:75     .text:0000000000000038 .L0 
-     /tmp/ccfsRVCr.s:76     .text:0000000000000038 .L0 
-     /tmp/ccfsRVCr.s:99     .text:000000000000005c .L0 
-     /tmp/ccfsRVCr.s:100    .text:000000000000005c .L0 
-     /tmp/ccfsRVCr.s:101    .text:000000000000005c .L0 
-     /tmp/ccfsRVCr.s:104    .text:0000000000000064 .L0 
-     /tmp/ccfsRVCr.s:105    .text:0000000000000064 .L0 
-     /tmp/ccfsRVCr.s:110    .text:0000000000000074 .L0 
-     /tmp/ccfsRVCr.s:111    .text:0000000000000074 .L0 
-     /tmp/ccfsRVCr.s:112    .text:0000000000000078 .L0 
-     /tmp/ccfsRVCr.s:113    .text:0000000000000078 .L0 
-     /tmp/ccfsRVCr.s:115    .text:000000000000007c .L0 
-     /tmp/ccfsRVCr.s:116    .text:000000000000007c .L0 
-     /tmp/ccfsRVCr.s:118    .text:0000000000000080 .L0 
-     /tmp/ccfsRVCr.s:120    .text:0000000000000084 .L0 
-     /tmp/ccfsRVCr.s:123    .text:0000000000000088 .L0 
-     /tmp/ccfsRVCr.s:125    .text:0000000000000088 .L0 
-     /tmp/ccfsRVCr.s:126    .text:0000000000000088 .L0 
-     /tmp/ccfsRVCr.s:127    .text:0000000000000088 .L0 
-     /tmp/ccfsRVCr.s:130    .text:0000000000000090 .L0 
-     /tmp/ccfsRVCr.s:131    .text:0000000000000090 .L0 
-     /tmp/ccfsRVCr.s:135    .text:00000000000000a0 .L0 
-     /tmp/ccfsRVCr.s:138    .text:00000000000000a4 .L0 
-     /tmp/ccfsRVCr.s:139    .text:00000000000000a4 .L0 
-     /tmp/ccfsRVCr.s:140    .text:00000000000000a4 .L0 
-     /tmp/ccfsRVCr.s:143    .text:00000000000000ac .L0 
-     /tmp/ccfsRVCr.s:144    .text:00000000000000ac .L0 
-     /tmp/ccfsRVCr.s:148    .text:00000000000000bc .L0 
-     /tmp/ccfsRVCr.s:151    .text:00000000000000c0 .L0 
-     /tmp/ccfsRVCr.s:152    .text:00000000000000c0 .L0 
-     /tmp/ccfsRVCr.s:153    .text:00000000000000c0 .L0 
-     /tmp/ccfsRVCr.s:156    .text:00000000000000c8 .L0 
-     /tmp/ccfsRVCr.s:157    .text:00000000000000c8 .L0 
-     /tmp/ccfsRVCr.s:161    .text:00000000000000d8 .L0 
-     /tmp/ccfsRVCr.s:164    .text:00000000000000dc .L0 
-     /tmp/ccfsRVCr.s:165    .text:00000000000000dc .L0 
-     /tmp/ccfsRVCr.s:166    .text:00000000000000dc .L0 
-     /tmp/ccfsRVCr.s:169    .text:00000000000000e4 .L0 
-GAS LISTING /tmp/ccfsRVCr.s 			page 10
+     /tmp/cckuQMXD.s:41     .text:0000000000000000 _Z8userMainv
+     /tmp/cckuQMXD.s:45     .text:0000000000000000 .L0 
+     /tmp/cckuQMXD.s:46     .text:0000000000000000 .L0 
+     /tmp/cckuQMXD.s:47     .text:0000000000000004 .L0 
+     /tmp/cckuQMXD.s:51     .text:0000000000000010 .L0 
+     /tmp/cckuQMXD.s:52     .text:0000000000000010 .L0 
+     /tmp/cckuQMXD.s:53     .text:0000000000000010 .L0 
+     /tmp/cckuQMXD.s:55     .text:0000000000000014 .L0 
+     /tmp/cckuQMXD.s:57     .text:0000000000000014 .L0 
+     /tmp/cckuQMXD.s:58     .text:0000000000000014 .L0 
+     /tmp/cckuQMXD.s:62     .text:0000000000000024 .L0 
+     /tmp/cckuQMXD.s:63     .text:0000000000000024 .L0 
+     /tmp/cckuQMXD.s:66     .text:000000000000002c .L0 
+     /tmp/cckuQMXD.s:69     .text:0000000000000030 .L0 
+     /tmp/cckuQMXD.s:70     .text:0000000000000030 .L0 
+     /tmp/cckuQMXD.s:73     .text:0000000000000038 .L0 
+     /tmp/cckuQMXD.s:74     .text:0000000000000038 .L0 
+     /tmp/cckuQMXD.s:75     .text:0000000000000038 .L0 
+     /tmp/cckuQMXD.s:76     .text:0000000000000038 .L0 
+     /tmp/cckuQMXD.s:99     .text:000000000000005c .L0 
+     /tmp/cckuQMXD.s:100    .text:000000000000005c .L0 
+     /tmp/cckuQMXD.s:101    .text:000000000000005c .L0 
+     /tmp/cckuQMXD.s:104    .text:0000000000000064 .L0 
+     /tmp/cckuQMXD.s:105    .text:0000000000000064 .L0 
+     /tmp/cckuQMXD.s:110    .text:0000000000000074 .L0 
+     /tmp/cckuQMXD.s:111    .text:0000000000000074 .L0 
+     /tmp/cckuQMXD.s:112    .text:0000000000000078 .L0 
+     /tmp/cckuQMXD.s:113    .text:0000000000000078 .L0 
+     /tmp/cckuQMXD.s:115    .text:000000000000007c .L0 
+     /tmp/cckuQMXD.s:116    .text:000000000000007c .L0 
+     /tmp/cckuQMXD.s:118    .text:0000000000000080 .L0 
+     /tmp/cckuQMXD.s:120    .text:0000000000000084 .L0 
+     /tmp/cckuQMXD.s:123    .text:0000000000000088 .L0 
+     /tmp/cckuQMXD.s:125    .text:0000000000000088 .L0 
+     /tmp/cckuQMXD.s:126    .text:0000000000000088 .L0 
+     /tmp/cckuQMXD.s:127    .text:0000000000000088 .L0 
+     /tmp/cckuQMXD.s:130    .text:0000000000000090 .L0 
+     /tmp/cckuQMXD.s:131    .text:0000000000000090 .L0 
+     /tmp/cckuQMXD.s:135    .text:00000000000000a0 .L0 
+     /tmp/cckuQMXD.s:138    .text:00000000000000a4 .L0 
+     /tmp/cckuQMXD.s:139    .text:00000000000000a4 .L0 
+     /tmp/cckuQMXD.s:140    .text:00000000000000a4 .L0 
+     /tmp/cckuQMXD.s:143    .text:00000000000000ac .L0 
+     /tmp/cckuQMXD.s:144    .text:00000000000000ac .L0 
+     /tmp/cckuQMXD.s:148    .text:00000000000000bc .L0 
+     /tmp/cckuQMXD.s:151    .text:00000000000000c0 .L0 
+     /tmp/cckuQMXD.s:152    .text:00000000000000c0 .L0 
+     /tmp/cckuQMXD.s:153    .text:00000000000000c0 .L0 
+     /tmp/cckuQMXD.s:156    .text:00000000000000c8 .L0 
+     /tmp/cckuQMXD.s:157    .text:00000000000000c8 .L0 
+     /tmp/cckuQMXD.s:161    .text:00000000000000d8 .L0 
+     /tmp/cckuQMXD.s:164    .text:00000000000000dc .L0 
+     /tmp/cckuQMXD.s:165    .text:00000000000000dc .L0 
+     /tmp/cckuQMXD.s:166    .text:00000000000000dc .L0 
+     /tmp/cckuQMXD.s:169    .text:00000000000000e4 .L0 
+GAS LISTING /tmp/cckuQMXD.s 			page 10
 
 
-     /tmp/ccfsRVCr.s:170    .text:00000000000000e4 .L0 
-     /tmp/ccfsRVCr.s:174    .text:00000000000000f4 .L0 
-     /tmp/ccfsRVCr.s:177    .text:00000000000000f8 .L0 
-     /tmp/ccfsRVCr.s:178    .text:00000000000000f8 .L0 
-     /tmp/ccfsRVCr.s:179    .text:00000000000000f8 .L0 
-     /tmp/ccfsRVCr.s:182    .text:0000000000000100 .L0 
-     /tmp/ccfsRVCr.s:183    .text:0000000000000100 .L0 
-     /tmp/ccfsRVCr.s:187    .text:0000000000000110 .L0 
-     /tmp/ccfsRVCr.s:190    .text:0000000000000114 .L0 
-     /tmp/ccfsRVCr.s:191    .text:0000000000000114 .L0 
-     /tmp/ccfsRVCr.s:192    .text:0000000000000114 .L0 
-     /tmp/ccfsRVCr.s:195    .text:000000000000011c .L0 
-     /tmp/ccfsRVCr.s:196    .text:000000000000011c .L0 
-     /tmp/ccfsRVCr.s:200    .text:000000000000012c .L0 
-     /tmp/ccfsRVCr.s:201    .text:000000000000012c .L0 
-     /tmp/ccfsRVCr.s:205    .text:000000000000013c .L0 
-     /tmp/ccfsRVCr.s:208    .text:0000000000000140 .L0 
-     /tmp/ccfsRVCr.s:209    .text:0000000000000140 .L0 
-     /tmp/ccfsRVCr.s:210    .text:0000000000000140 .L0 
-     /tmp/ccfsRVCr.s:214    .text:0000000000000154 .L0 
-     /tmp/ccfsRVCr.s:228    .text:0000000000000154 .L0 
-     /tmp/ccfsRVCr.s:8      .rodata.str1.8:0000000000000000 .LC0
-     /tmp/ccfsRVCr.s:58     .text:0000000000000014 .L0 
-     /tmp/ccfsRVCr.s:87     .rodata:0000000000000000 .L4
-     /tmp/ccfsRVCr.s:79     .text:0000000000000044 .L0 
-     /tmp/ccfsRVCr.s:11     .rodata.str1.8:0000000000000020 .LC1
-     /tmp/ccfsRVCr.s:105    .text:0000000000000064 .L0 
-     /tmp/ccfsRVCr.s:14     .rodata.str1.8:0000000000000060 .LC2
-     /tmp/ccfsRVCr.s:131    .text:0000000000000090 .L0 
-     /tmp/ccfsRVCr.s:17     .rodata.str1.8:00000000000000a0 .LC3
-     /tmp/ccfsRVCr.s:144    .text:00000000000000ac .L0 
-     /tmp/ccfsRVCr.s:20     .rodata.str1.8:00000000000000f0 .LC4
-     /tmp/ccfsRVCr.s:157    .text:00000000000000c8 .L0 
-     /tmp/ccfsRVCr.s:23     .rodata.str1.8:0000000000000148 .LC5
-     /tmp/ccfsRVCr.s:170    .text:00000000000000e4 .L0 
-     /tmp/ccfsRVCr.s:26     .rodata.str1.8:0000000000000178 .LC6
-     /tmp/ccfsRVCr.s:183    .text:0000000000000100 .L0 
-     /tmp/ccfsRVCr.s:29     .rodata.str1.8:00000000000001b8 .LC7
-     /tmp/ccfsRVCr.s:196    .text:000000000000011c .L0 
-     /tmp/ccfsRVCr.s:32     .rodata.str1.8:00000000000001d8 .LC8
-     /tmp/ccfsRVCr.s:201    .text:000000000000012c .L0 
-     /tmp/ccfsRVCr.s:35     .rodata.str1.8:0000000000000230 .LC9
-     /tmp/ccfsRVCr.s:210    .text:0000000000000140 .L0 
-     /tmp/ccfsRVCr.s:206    .text:0000000000000140 .L2
-     /tmp/ccfsRVCr.s:109    .text:0000000000000074 .L1
-     /tmp/ccfsRVCr.s:97     .text:000000000000005c .L10
-     /tmp/ccfsRVCr.s:122    .text:0000000000000088 .L9
-     /tmp/ccfsRVCr.s:136    .text:00000000000000a4 .L8
-     /tmp/ccfsRVCr.s:149    .text:00000000000000c0 .L7
-     /tmp/ccfsRVCr.s:162    .text:00000000000000dc .L6
-     /tmp/ccfsRVCr.s:175    .text:00000000000000f8 .L5
-     /tmp/ccfsRVCr.s:188    .text:0000000000000114 .L3
-     /tmp/ccfsRVCr.s:578    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccfsRVCr.s:930    .debug_str:00000000000002a6 .LASF37
-     /tmp/ccfsRVCr.s:924    .debug_str:000000000000026c .LASF38
-     /tmp/ccfsRVCr.s:902    .debug_str:0000000000000188 .LASF39
-     /tmp/ccfsRVCr.s:5      .text:0000000000000000 .Ltext0
-GAS LISTING /tmp/ccfsRVCr.s 			page 11
+     /tmp/cckuQMXD.s:170    .text:00000000000000e4 .L0 
+     /tmp/cckuQMXD.s:174    .text:00000000000000f4 .L0 
+     /tmp/cckuQMXD.s:177    .text:00000000000000f8 .L0 
+     /tmp/cckuQMXD.s:178    .text:00000000000000f8 .L0 
+     /tmp/cckuQMXD.s:179    .text:00000000000000f8 .L0 
+     /tmp/cckuQMXD.s:182    .text:0000000000000100 .L0 
+     /tmp/cckuQMXD.s:183    .text:0000000000000100 .L0 
+     /tmp/cckuQMXD.s:187    .text:0000000000000110 .L0 
+     /tmp/cckuQMXD.s:190    .text:0000000000000114 .L0 
+     /tmp/cckuQMXD.s:191    .text:0000000000000114 .L0 
+     /tmp/cckuQMXD.s:192    .text:0000000000000114 .L0 
+     /tmp/cckuQMXD.s:195    .text:000000000000011c .L0 
+     /tmp/cckuQMXD.s:196    .text:000000000000011c .L0 
+     /tmp/cckuQMXD.s:200    .text:000000000000012c .L0 
+     /tmp/cckuQMXD.s:201    .text:000000000000012c .L0 
+     /tmp/cckuQMXD.s:205    .text:000000000000013c .L0 
+     /tmp/cckuQMXD.s:208    .text:0000000000000140 .L0 
+     /tmp/cckuQMXD.s:209    .text:0000000000000140 .L0 
+     /tmp/cckuQMXD.s:210    .text:0000000000000140 .L0 
+     /tmp/cckuQMXD.s:214    .text:0000000000000154 .L0 
+     /tmp/cckuQMXD.s:228    .text:0000000000000154 .L0 
+     /tmp/cckuQMXD.s:8      .rodata.str1.8:0000000000000000 .LC0
+     /tmp/cckuQMXD.s:58     .text:0000000000000014 .L0 
+     /tmp/cckuQMXD.s:87     .rodata:0000000000000000 .L4
+     /tmp/cckuQMXD.s:79     .text:0000000000000044 .L0 
+     /tmp/cckuQMXD.s:11     .rodata.str1.8:0000000000000020 .LC1
+     /tmp/cckuQMXD.s:105    .text:0000000000000064 .L0 
+     /tmp/cckuQMXD.s:14     .rodata.str1.8:0000000000000060 .LC2
+     /tmp/cckuQMXD.s:131    .text:0000000000000090 .L0 
+     /tmp/cckuQMXD.s:17     .rodata.str1.8:00000000000000a0 .LC3
+     /tmp/cckuQMXD.s:144    .text:00000000000000ac .L0 
+     /tmp/cckuQMXD.s:20     .rodata.str1.8:00000000000000f0 .LC4
+     /tmp/cckuQMXD.s:157    .text:00000000000000c8 .L0 
+     /tmp/cckuQMXD.s:23     .rodata.str1.8:0000000000000148 .LC5
+     /tmp/cckuQMXD.s:170    .text:00000000000000e4 .L0 
+     /tmp/cckuQMXD.s:26     .rodata.str1.8:0000000000000178 .LC6
+     /tmp/cckuQMXD.s:183    .text:0000000000000100 .L0 
+     /tmp/cckuQMXD.s:29     .rodata.str1.8:00000000000001b8 .LC7
+     /tmp/cckuQMXD.s:196    .text:000000000000011c .L0 
+     /tmp/cckuQMXD.s:32     .rodata.str1.8:00000000000001d8 .LC8
+     /tmp/cckuQMXD.s:201    .text:000000000000012c .L0 
+     /tmp/cckuQMXD.s:35     .rodata.str1.8:0000000000000230 .LC9
+     /tmp/cckuQMXD.s:210    .text:0000000000000140 .L0 
+     /tmp/cckuQMXD.s:206    .text:0000000000000140 .L2
+     /tmp/cckuQMXD.s:109    .text:0000000000000074 .L1
+     /tmp/cckuQMXD.s:97     .text:000000000000005c .L10
+     /tmp/cckuQMXD.s:122    .text:0000000000000088 .L9
+     /tmp/cckuQMXD.s:136    .text:00000000000000a4 .L8
+     /tmp/cckuQMXD.s:149    .text:00000000000000c0 .L7
+     /tmp/cckuQMXD.s:162    .text:00000000000000dc .L6
+     /tmp/cckuQMXD.s:175    .text:00000000000000f8 .L5
+     /tmp/cckuQMXD.s:188    .text:0000000000000114 .L3
+     /tmp/cckuQMXD.s:578    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/cckuQMXD.s:930    .debug_str:00000000000002a6 .LASF37
+     /tmp/cckuQMXD.s:924    .debug_str:000000000000026c .LASF38
+     /tmp/cckuQMXD.s:902    .debug_str:0000000000000188 .LASF39
+     /tmp/cckuQMXD.s:5      .text:0000000000000000 .Ltext0
+GAS LISTING /tmp/cckuQMXD.s 			page 11
 
 
-     /tmp/ccfsRVCr.s:217    .text:0000000000000154 .Letext0
-     /tmp/ccfsRVCr.s:852    .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/ccfsRVCr.s:906    .debug_str:00000000000001c7 .LASF0
-     /tmp/ccfsRVCr.s:912    .debug_str:00000000000001ff .LASF1
-     /tmp/ccfsRVCr.s:900    .debug_str:000000000000017a .LASF2
-     /tmp/ccfsRVCr.s:890    .debug_str:000000000000011e .LASF4
-     /tmp/ccfsRVCr.s:928    .debug_str:0000000000000294 .LASF3
-     /tmp/ccfsRVCr.s:862    .debug_str:000000000000002f .LASF5
-     /tmp/ccfsRVCr.s:914    .debug_str:0000000000000212 .LASF6
-     /tmp/ccfsRVCr.s:904    .debug_str:00000000000001b4 .LASF7
-     /tmp/ccfsRVCr.s:934    .debug_str:0000000000000379 .LASF8
-     /tmp/ccfsRVCr.s:884    .debug_str:00000000000000f6 .LASF9
-     /tmp/ccfsRVCr.s:918    .debug_str:000000000000023a .LASF10
-     /tmp/ccfsRVCr.s:932    .debug_str:000000000000036a .LASF11
-     /tmp/ccfsRVCr.s:864    .debug_str:0000000000000036 .LASF12
-     /tmp/ccfsRVCr.s:854    .debug_str:0000000000000000 .LASF13
-     /tmp/ccfsRVCr.s:866    .debug_str:0000000000000046 .LASF14
-     /tmp/ccfsRVCr.s:926    .debug_str:000000000000027e .LASF15
-     /tmp/ccfsRVCr.s:872    .debug_str:000000000000007d .LASF16
-     /tmp/ccfsRVCr.s:880    .debug_str:00000000000000d7 .LASF17
-     /tmp/ccfsRVCr.s:876    .debug_str:00000000000000ab .LASF40
-     /tmp/ccfsRVCr.s:892    .debug_str:0000000000000125 .LASF41
-     /tmp/ccfsRVCr.s:42     .text:0000000000000000 .LFB19
-     /tmp/ccfsRVCr.s:215    .text:0000000000000154 .LFE19
-     /tmp/ccfsRVCr.s:920    .debug_str:0000000000000249 .LASF18
-     /tmp/ccfsRVCr.s:830    .debug_loc:0000000000000000 .LLST0
-     /tmp/ccfsRVCr.s:60     .text:0000000000000024 .LVL0
-     /tmp/ccfsRVCr.s:64     .text:000000000000002c .LVL1
-     /tmp/ccfsRVCr.s:71     .text:0000000000000038 .LVL3
-     /tmp/ccfsRVCr.s:102    .text:0000000000000064 .LVL4
-     /tmp/ccfsRVCr.s:107    .text:0000000000000074 .LVL5
-     /tmp/ccfsRVCr.s:128    .text:0000000000000090 .LVL6
-     /tmp/ccfsRVCr.s:133    .text:00000000000000a0 .LVL7
-     /tmp/ccfsRVCr.s:141    .text:00000000000000ac .LVL8
-     /tmp/ccfsRVCr.s:146    .text:00000000000000bc .LVL9
-     /tmp/ccfsRVCr.s:154    .text:00000000000000c8 .LVL10
-     /tmp/ccfsRVCr.s:159    .text:00000000000000d8 .LVL11
-     /tmp/ccfsRVCr.s:167    .text:00000000000000e4 .LVL12
-     /tmp/ccfsRVCr.s:172    .text:00000000000000f4 .LVL13
-     /tmp/ccfsRVCr.s:180    .text:0000000000000100 .LVL14
-     /tmp/ccfsRVCr.s:185    .text:0000000000000110 .LVL15
-     /tmp/ccfsRVCr.s:193    .text:000000000000011c .LVL16
-     /tmp/ccfsRVCr.s:198    .text:000000000000012c .LVL17
-     /tmp/ccfsRVCr.s:203    .text:000000000000013c .LVL18
-     /tmp/ccfsRVCr.s:212    .text:0000000000000150 .LVL19
-     /tmp/ccfsRVCr.s:910    .debug_str:00000000000001eb .LASF19
-     /tmp/ccfsRVCr.s:888    .debug_str:0000000000000111 .LASF21
-     /tmp/ccfsRVCr.s:860    .debug_str:0000000000000026 .LASF20
-     /tmp/ccfsRVCr.s:856    .debug_str:0000000000000010 .LASF22
-     /tmp/ccfsRVCr.s:874    .debug_str:0000000000000093 .LASF23
-     /tmp/ccfsRVCr.s:936    .debug_str:0000000000000389 .LASF24
-     /tmp/ccfsRVCr.s:882    .debug_str:00000000000000dc .LASF25
-     /tmp/ccfsRVCr.s:916    .debug_str:0000000000000225 .LASF26
-     /tmp/ccfsRVCr.s:898    .debug_str:000000000000015e .LASF27
-     /tmp/ccfsRVCr.s:908    .debug_str:00000000000001d4 .LASF28
-     /tmp/ccfsRVCr.s:878    .debug_str:00000000000000b4 .LASF29
-     /tmp/ccfsRVCr.s:922    .debug_str:000000000000024e .LASF30
-GAS LISTING /tmp/ccfsRVCr.s 			page 12
+     /tmp/cckuQMXD.s:217    .text:0000000000000154 .Letext0
+     /tmp/cckuQMXD.s:852    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/cckuQMXD.s:906    .debug_str:00000000000001c7 .LASF0
+     /tmp/cckuQMXD.s:912    .debug_str:00000000000001ff .LASF1
+     /tmp/cckuQMXD.s:900    .debug_str:000000000000017a .LASF2
+     /tmp/cckuQMXD.s:890    .debug_str:000000000000011e .LASF4
+     /tmp/cckuQMXD.s:928    .debug_str:0000000000000294 .LASF3
+     /tmp/cckuQMXD.s:862    .debug_str:000000000000002f .LASF5
+     /tmp/cckuQMXD.s:914    .debug_str:0000000000000212 .LASF6
+     /tmp/cckuQMXD.s:904    .debug_str:00000000000001b4 .LASF7
+     /tmp/cckuQMXD.s:934    .debug_str:0000000000000379 .LASF8
+     /tmp/cckuQMXD.s:884    .debug_str:00000000000000f6 .LASF9
+     /tmp/cckuQMXD.s:918    .debug_str:000000000000023a .LASF10
+     /tmp/cckuQMXD.s:932    .debug_str:000000000000036a .LASF11
+     /tmp/cckuQMXD.s:864    .debug_str:0000000000000036 .LASF12
+     /tmp/cckuQMXD.s:854    .debug_str:0000000000000000 .LASF13
+     /tmp/cckuQMXD.s:866    .debug_str:0000000000000046 .LASF14
+     /tmp/cckuQMXD.s:926    .debug_str:000000000000027e .LASF15
+     /tmp/cckuQMXD.s:872    .debug_str:000000000000007d .LASF16
+     /tmp/cckuQMXD.s:880    .debug_str:00000000000000d7 .LASF17
+     /tmp/cckuQMXD.s:876    .debug_str:00000000000000ab .LASF40
+     /tmp/cckuQMXD.s:892    .debug_str:0000000000000125 .LASF41
+     /tmp/cckuQMXD.s:42     .text:0000000000000000 .LFB19
+     /tmp/cckuQMXD.s:215    .text:0000000000000154 .LFE19
+     /tmp/cckuQMXD.s:920    .debug_str:0000000000000249 .LASF18
+     /tmp/cckuQMXD.s:830    .debug_loc:0000000000000000 .LLST0
+     /tmp/cckuQMXD.s:60     .text:0000000000000024 .LVL0
+     /tmp/cckuQMXD.s:64     .text:000000000000002c .LVL1
+     /tmp/cckuQMXD.s:71     .text:0000000000000038 .LVL3
+     /tmp/cckuQMXD.s:102    .text:0000000000000064 .LVL4
+     /tmp/cckuQMXD.s:107    .text:0000000000000074 .LVL5
+     /tmp/cckuQMXD.s:128    .text:0000000000000090 .LVL6
+     /tmp/cckuQMXD.s:133    .text:00000000000000a0 .LVL7
+     /tmp/cckuQMXD.s:141    .text:00000000000000ac .LVL8
+     /tmp/cckuQMXD.s:146    .text:00000000000000bc .LVL9
+     /tmp/cckuQMXD.s:154    .text:00000000000000c8 .LVL10
+     /tmp/cckuQMXD.s:159    .text:00000000000000d8 .LVL11
+     /tmp/cckuQMXD.s:167    .text:00000000000000e4 .LVL12
+     /tmp/cckuQMXD.s:172    .text:00000000000000f4 .LVL13
+     /tmp/cckuQMXD.s:180    .text:0000000000000100 .LVL14
+     /tmp/cckuQMXD.s:185    .text:0000000000000110 .LVL15
+     /tmp/cckuQMXD.s:193    .text:000000000000011c .LVL16
+     /tmp/cckuQMXD.s:198    .text:000000000000012c .LVL17
+     /tmp/cckuQMXD.s:203    .text:000000000000013c .LVL18
+     /tmp/cckuQMXD.s:212    .text:0000000000000150 .LVL19
+     /tmp/cckuQMXD.s:910    .debug_str:00000000000001eb .LASF19
+     /tmp/cckuQMXD.s:888    .debug_str:0000000000000111 .LASF21
+     /tmp/cckuQMXD.s:860    .debug_str:0000000000000026 .LASF20
+     /tmp/cckuQMXD.s:856    .debug_str:0000000000000010 .LASF22
+     /tmp/cckuQMXD.s:874    .debug_str:0000000000000093 .LASF23
+     /tmp/cckuQMXD.s:936    .debug_str:0000000000000389 .LASF24
+     /tmp/cckuQMXD.s:882    .debug_str:00000000000000dc .LASF25
+     /tmp/cckuQMXD.s:916    .debug_str:0000000000000225 .LASF26
+     /tmp/cckuQMXD.s:898    .debug_str:000000000000015e .LASF27
+     /tmp/cckuQMXD.s:908    .debug_str:00000000000001d4 .LASF28
+     /tmp/cckuQMXD.s:878    .debug_str:00000000000000b4 .LASF29
+     /tmp/cckuQMXD.s:922    .debug_str:000000000000024e .LASF30
+GAS LISTING /tmp/cckuQMXD.s 			page 12
 
 
-     /tmp/ccfsRVCr.s:894    .debug_str:0000000000000132 .LASF31
-     /tmp/ccfsRVCr.s:886    .debug_str:0000000000000104 .LASF32
-     /tmp/ccfsRVCr.s:896    .debug_str:0000000000000144 .LASF33
-     /tmp/ccfsRVCr.s:870    .debug_str:0000000000000068 .LASF34
-     /tmp/ccfsRVCr.s:868    .debug_str:0000000000000052 .LASF35
-     /tmp/ccfsRVCr.s:858    .debug_str:0000000000000015 .LASF36
-     /tmp/ccfsRVCr.s:67     .text:0000000000000030 .LVL2
-     /tmp/ccfsRVCr.s:229    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/cckuQMXD.s:894    .debug_str:0000000000000132 .LASF31
+     /tmp/cckuQMXD.s:886    .debug_str:0000000000000104 .LASF32
+     /tmp/cckuQMXD.s:896    .debug_str:0000000000000144 .LASF33
+     /tmp/cckuQMXD.s:870    .debug_str:0000000000000068 .LASF34
+     /tmp/cckuQMXD.s:868    .debug_str:0000000000000052 .LASF35
+     /tmp/cckuQMXD.s:858    .debug_str:0000000000000015 .LASF36
+     /tmp/cckuQMXD.s:67     .text:0000000000000030 .LVL2
+     /tmp/cckuQMXD.s:229    .debug_info:0000000000000000 .Ldebug_info0
 
 UNDEFINED SYMBOLS
 _Z12pprintStringPKc
